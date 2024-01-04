@@ -44,11 +44,11 @@ app.*.map.json
 /android/app/release
 ECHO is on.
 
-ios
-linux
-android
-windows
-test
-Miscellaneous
-web
-macos
+# ios
+# linux
+# android
+# windows
+# test
+# Miscellaneous
+# web
+# macos
