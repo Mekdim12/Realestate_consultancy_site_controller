@@ -24,6 +24,7 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
             width: 250,
             height: 250,
             color: null,
+            margin:const EdgeInsets.only(top: 50),
             decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
