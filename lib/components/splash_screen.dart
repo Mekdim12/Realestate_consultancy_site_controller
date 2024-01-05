@@ -32,7 +32,24 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
                 ),
            )    
           ),
-          const Text("Real State Consultancy", style: TextStyle(fontSize: 20, color: Colors.purple, fontWeight: FontWeight.bold),)
+          const Text("Real State Consultancy", style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              fontSize: 27,
+              fontStyle: FontStyle.normal,
+              color: Color.fromARGB(179, 19, 18, 18),
+              height: 3,
+              wordSpacing: 2,
+              shadows: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 133, 129, 129),
+                  spreadRadius: 15,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            )
         ],
       ),
     
