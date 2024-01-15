@@ -15,7 +15,7 @@ class MainAppWidget extends StatelessWidget{
         primarySwatch: Colors.purple,
       ),
        home: Scaffold(
-        body: LoginPageWidget(),
+        body: SplashScreenWidget(),
        )
     );
   }
