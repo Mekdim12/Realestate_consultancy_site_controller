@@ -1,12 +1,6 @@
-
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import './login_page.dart';
-import 'package:internet_connection_checker/internet_connection.dart';
 
 class SplashScreenWidget extends StatefulWidget{
   const SplashScreenWidget({super.key});
@@ -16,45 +10,18 @@ class SplashScreenWidget extends StatefulWidget{
   
 }
 
-Future<Connectivity> check_internet_connection() async{
-  final result =  await Connectivity().checkConnectivity();
-  return result;
-}
 
 
 class MainSplashScreenState extends State<SplashScreenWidget> {
-  late StreamSubscription subscription;
-  late StreamSubscription internetSubscritption;
-  bool hasInternet = false;
+ 
   @override
   void initState(){
     super.initState();
-    subscription = Connectivity().onConnectivityChanged.listen(_checkInternetConnection);
-    internetSubscritption = InternetConnectionChecker().onStatusChange.listen((status) {
-      final hasInternet = status == InternetConnectionStatus.connected;
-
-      setState(()=> this.hasInternet = hasInternet);
-    });
   }
 
-  void _checkInternetConnection(ConnectivityResult result){
-    final hasInternet = result != ConnectivityResult.none;
-    
-  }
+  
   @override
   Widget build(BuildContext context){
-
-    Future<bool> flag = check_internet_connection();
-
-    flag.then((value) => {
-          if(hasInternet){
-            Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (ctx) {
-              return LoginPageWidget();
-            }),
-          )
-          }
-        });
 
     return Container(
       width: double.infinity,
