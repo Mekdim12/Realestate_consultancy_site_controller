@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './components/splash_screen.dart';
 import './components/login_page.dart';
+import './components/home.dart';
+
 void main() {
   runApp(const MainAppWidget());
 }
@@ -15,7 +17,7 @@ class MainAppWidget extends StatelessWidget{
         primarySwatch: Colors.purple,
       ),
        home: Scaffold(
-        body: SplashScreenWidget(),
+        body: HomePage(),
        )
     );
   }
