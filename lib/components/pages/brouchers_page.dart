@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,97 @@ class BrouchersPage extends StatefulWidget {
   State<BrouchersPage> createState() => _BrouchersPageState();
 }
 
+class BrouchersData{
+  String name_of_the_fle;
+  String type_of_the kffer
+}
+
 class _BrouchersPageState extends State<BrouchersPage> {
+  final list_of_brouchers_of_offers = [
+    "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3646108/pexels-photo-3646108.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3879065/pexels-photo-3879065.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/1841120/pexels-photo-1841120.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3608542/pexels-photo-3608542.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3786092/pexels-photo-3786092.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "https://images.pexels.com/photos/3166786/pexels-photo-3166786.jpeg?auto=compress&cs=tinysrgb&w=600"
+  ];
+  final list_of_brouchers_of_offers_local = [
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png'),
+    AssetImage('assets/images/not_found.png')
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return const Text("Brouchers page");
+    bool is_image_available = list_of_brouchers_of_offers.length > 0;
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        backgroundColor: Colors.purple,
+        child: const Icon(Icons.add),
+      ),
+      body: is_image_available
+          ? Container(
+              margin: const EdgeInsets.symmetric(horizontal:10, vertical: 20 ),
+              child: CarouselSlider.builder(
+                options: CarouselOptions(
+                    autoPlay: true,
+                    autoPlayAnimationDuration:const  Duration(milliseconds: 500),
+                    autoPlayCurve: Curves.easeIn,
+                    height: 200,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.6),
+                itemCount: list_of_brouchers_of_offers.length,
+                itemBuilder:
+                    (BuildContext context, int itemIndex, int pageViewIndex) {
+                  return Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(horizontal: 2.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        // image: DecorationImage(
+                        //     image: NetworkImage(
+                        //         list_of_brouchers_of_offers_local[itemIndex]),
+                        //     fit: BoxFit.fitWidth),
+                        //     ),
+                         image: DecorationImage(
+                            image:list_of_brouchers_of_offers_local[itemIndex],
+                            fit: BoxFit.fitWidth),
+                            ),
+                  );
+                },
+              ))
+          : SizedBox(
+              width: double.infinity,
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      width: 105,
+                      height: 105,
+                      // co?lor: null,
+                      margin: const EdgeInsets.only(top: 10),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/not_found.png'),
+                        ),
+                      )),
+                  const Text(
+                    "No Brouchers Found",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+    );
   }
 }
