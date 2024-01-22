@@ -10,8 +10,9 @@ class BrouchersPage extends StatefulWidget {
 }
 
 class BrouchersData{
-  String name_of_the_fle;
-  String type_of_the kffer
+  String nameOfTheFile="";
+  String typeOfTheFile="";
+  int numberLabel = 1;
 }
 
 class _BrouchersPageState extends State<BrouchersPage> {
