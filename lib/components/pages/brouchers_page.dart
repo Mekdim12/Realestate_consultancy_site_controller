@@ -65,11 +65,6 @@ class _BrouchersPageState extends State<BrouchersPage> {
                     margin: const EdgeInsets.symmetric(horizontal: 2.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        // image: DecorationImage(
-                        //     image: NetworkImage(
-                        //         list_of_brouchers_of_offers_local[itemIndex]),
-                        //     fit: BoxFit.fitWidth),
-                        //     ),
                          image: DecorationImage(
                             image:list_of_brouchers_of_offers_local[itemIndex],
                             fit: BoxFit.fitWidth),
@@ -86,7 +81,6 @@ class _BrouchersPageState extends State<BrouchersPage> {
                   Container(
                       width: 105,
                       height: 105,
-                      // co?lor: null,
                       margin: const EdgeInsets.only(top: 10),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
