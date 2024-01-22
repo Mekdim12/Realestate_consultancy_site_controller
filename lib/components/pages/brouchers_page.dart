@@ -16,6 +16,7 @@ class BrouchersData{
 }
 
 class _BrouchersPageState extends State<BrouchersPage> {
+  // fall back as place holder for image slider in brouchers page
   final list_of_brouchers_of_offers = [
     "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
     "https://images.pexels.com/photos/3646108/pexels-photo-3646108.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -25,6 +26,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
     "https://images.pexels.com/photos/3786092/pexels-photo-3786092.jpeg?auto=compress&cs=tinysrgb&w=600",
     "https://images.pexels.com/photos/3166786/pexels-photo-3166786.jpeg?auto=compress&cs=tinysrgb&w=600"
   ];
+  //  local dev place for slider image when working with no internet
   final list_of_brouchers_of_offers_local = [
     AssetImage('assets/images/not_found.png'),
     AssetImage('assets/images/not_found.png'),
@@ -85,6 +87,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.cover,
+                          // no item found sad search message
                           image: AssetImage('assets/images/not_found.png'),
                         ),
                       )),
