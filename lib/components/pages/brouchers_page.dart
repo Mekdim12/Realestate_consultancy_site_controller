@@ -133,15 +133,21 @@ class _BrouchersPageState extends State<BrouchersPage> {
                 },
               )) ,
               Container(
-                margin: const EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                 height: screenHeight - 400,
                 child: ListView.builder(
                   itemCount:listOfBroucherItems.length,
                   itemBuilder: (context, index){
-                    print("xxxxxxxxxxxxxx");
+                    var currentItem = listOfBroucherItems[index];
                     return ListTile(
-                      title: Text("Mekdim TAMIRAT"),
-                      subtitle : Text("sibSDFSDF"),
+                      iconColor: Colors.purple,
+                      selectedColor: Colors.deepPurple,
+                      enableFeedback: true,
+                      hoverColor: Colors.deepPurple,
+                      contentPadding: const EdgeInsets.all(5),
+                      leading: Image(image:AssetImage(currentItem.filePath)),
+                      title: Text(currentItem.nameOfTheFile),
+                      subtitle : (currentItem.descritpion.toString().length > 50 )? Text("${currentItem.descritpion.toString().substring(0, 50)}..."): Text("${currentItem.descritpion.toString().substring(0, currentItem.descritpion.toString().length)}..."),
                       trailing: Icon(Icons.arrow_forward),
                     );
                   }
