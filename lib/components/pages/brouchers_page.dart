@@ -146,7 +146,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
                       hoverColor: Colors.deepPurple,
                       contentPadding: const EdgeInsets.all(5),
                       leading: Image(image:AssetImage(currentItem.filePath)),
-                      title: Text(currentItem.nameOfTheFile),
+                      title: Text(currentItem.nameOfTheFile, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.purple),),
                       subtitle : (currentItem.descritpion.toString().length > 50 )? Text("${currentItem.descritpion.toString().substring(0, 50)}..."): Text("${currentItem.descritpion.toString().substring(0, currentItem.descritpion.toString().length)}..."),
                       trailing: Icon(Icons.arrow_forward),
                     );
