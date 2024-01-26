@@ -2,6 +2,7 @@
 //  like 1 with id and everything to be updated and deleted 
 // 2 for adding new item with floating button
 
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -16,6 +17,11 @@ class BrouchersDetailPage extends StatefulWidget {
 class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    bool isPageAddItem = widget.isPageAddItem;
+    // return Scaffold(
+    //   appBar: Center(
+    //     child:  Image("assets/images/not_found.png")
+    //   ),
+    );
   }
 }
