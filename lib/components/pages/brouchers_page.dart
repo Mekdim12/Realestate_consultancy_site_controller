@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import './brouchers_detail_page.dart';
 
 class BrouchersPage extends StatefulWidget {
   const BrouchersPage({super.key});
@@ -99,7 +100,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const BrouchersDetailPage(true)));
         },
         backgroundColor: Colors.purple,
         child: const Icon(Icons.add),
@@ -136,19 +137,25 @@ class _BrouchersPageState extends State<BrouchersPage> {
                 margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
                 height: screenHeight - 400,
                 child: ListView.builder(
+                 
                   itemCount:listOfBroucherItems.length,
                   itemBuilder: (context, index){
                     var currentItem = listOfBroucherItems[index];
                     return ListTile(
+                      onTap: () => {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const BrouchersDetailPage(false) ))
+                      },
                       iconColor: Colors.purple,
                       selectedColor: Colors.deepPurple,
                       enableFeedback: true,
-                      hoverColor: Colors.deepPurple,
+                      hoverColor: Color.fromARGB(89, 104, 58, 183),
                       contentPadding: const EdgeInsets.all(5),
                       leading: Image(image:AssetImage(currentItem.filePath)),
                       title: Text(currentItem.nameOfTheFile, style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.purple),),
                       subtitle : (currentItem.descritpion.toString().length > 50 )? Text("${currentItem.descritpion.toString().substring(0, 50)}..."): Text("${currentItem.descritpion.toString().substring(0, currentItem.descritpion.toString().length)}..."),
-                      trailing: Icon(Icons.arrow_forward),
+                      trailing: ElevatedButton.icon(onPressed: ()=>{
+
+                      }, icon: const Icon(Icons.delete),label: const Text(''), ),
                     );
                   }
                   ) ,
