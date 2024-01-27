@@ -100,7 +100,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const BrouchersDetailPage(true)));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const BrouchersDetailPage()));
         },
         backgroundColor: Colors.purple,
         child: const Icon(Icons.add),
@@ -143,7 +143,7 @@ class _BrouchersPageState extends State<BrouchersPage> {
                     var currentItem = listOfBroucherItems[index];
                     return ListTile(
                       onTap: () => {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const BrouchersDetailPage(false) ))
+                       
                       },
                       iconColor: Colors.purple,
                       selectedColor: Colors.deepPurple,
