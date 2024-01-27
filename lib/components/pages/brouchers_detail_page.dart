@@ -1,27 +1,100 @@
-//  pass context either you use this either to update and delete the brouchers info other wise to upload some
-//  like 1 with id and everything to be updated and deleted 
-// 2 for adding new item with floating button
+//  new page only to add new item  and delete on the item list its self no update for simplicfication
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class BrouchersDetailPage extends StatefulWidget {
-  const BrouchersDetailPage(this.isPageAddItem, {super.key});
-  final bool isPageAddItem;
+  const BrouchersDetailPage({super.key});
 
   @override
   State<BrouchersDetailPage> createState() => _BrouchersDetailPageState();
 }
 
 class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
+  final CurrentSelectedChoice = "other";
   @override
   Widget build(BuildContext context) {
-    bool isPageAddItem = widget.isPageAddItem;
-    // return Scaffold(
-    //   appBar: Center(
-    //     child:  Image("assets/images/not_found.png")
-    //   ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text("Add Broucher"),
+        ),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+        child: Column(
+          children: [
+            const TextField(
+              cursorColor: Colors.purple,
+              decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.purple)),
+                icon: Icon(Icons.abc_rounded),
+                iconColor: Color.fromARGB(255, 85, 42, 92),
+                labelText: "Tittle",
+                labelStyle: TextStyle(
+                  color: Colors.purple,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+            ),
+            const TextField(
+              cursorColor: Colors.purple,
+              decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.purple)),
+                icon: Icon(Icons.abc_rounded),
+                iconColor: Color.fromARGB(255, 85, 42, 92),
+                labelText: "Description",
+                labelStyle: TextStyle(
+                  color: Colors.purple,
+                ),
+              ),
+            ),
+            Container(
+                margin:
+                    EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
+                child: DropdownButton(
+                  elevation: 10,
+                  isExpanded: true,
+                  iconEnabledColor: Colors.green,
+                  iconSize: 30,
+                  icon: const Icon(Icons.menu_book),
+                  value: CurrentSelectedChoice,
+                  onChanged: (value) {},
+                  items: const [
+                    DropdownMenuItem(
+                      enabled: true,
+                      alignment: Alignment.center,
+                      value: 'main',
+                      child: Text(
+                        'Main',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'quickSand',
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      alignment: Alignment.center,
+                      value: 'other',
+                      child: Text(
+                        'Other',
+                        style: TextStyle(
+                            fontFamily: 'quickSand',
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
+                ))
+          ],
+        ),
+      ),
     );
   }
 }
