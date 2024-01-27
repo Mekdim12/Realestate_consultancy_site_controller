@@ -12,7 +12,7 @@ class BrouchersDetailPage extends StatefulWidget {
 }
 
 class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
-  final CurrentSelectedChoice = "other";
+  String CurrentSelectedChoice = "other";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,15 +58,19 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
             ),
             Container(
                 margin:
-                    EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
+                    EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 15),
                 child: DropdownButton(
                   elevation: 10,
                   isExpanded: true,
                   iconEnabledColor: Colors.green,
                   iconSize: 30,
                   icon: const Icon(Icons.menu_book),
-                  value: CurrentSelectedChoice,
-                  onChanged: (value) {},
+                  value: "other",
+                  onChanged: (value) {
+                    setState(() {
+                      CurrentSelectedChoice = value!;
+                    });
+                  },
                   items: const [
                     DropdownMenuItem(
                       enabled: true,
