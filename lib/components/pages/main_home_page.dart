@@ -43,8 +43,8 @@ class _MainHomePageState extends State<MainHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CardWidget(150, 100, "User", "5984"),
-                    CardWidget(150, 100, "Call", "56"),
+                    CardWidget(150, 100, "Avg Price", "5984"),
+                    CardWidget(150, 100, "Companies", "56"),
                   ],
                 )),
 

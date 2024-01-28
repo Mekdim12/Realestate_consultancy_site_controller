@@ -75,7 +75,7 @@ class LoginPageState extends State<LoginPageWidget> {
               onPressed: () => {
                 if (_userNameOfAdmin.text.toString().trim().toLowerCase() == "admin" &&
                     _passwordOfAdmin.text.toString().trim().toLowerCase() == "admin"){
-                      print("okkkkkkkkkkkkkkkkkkkkkkkkkkay")
+                      print("perform the authentication")
                   }else{
                     setState((){
                         userNameOrPasswordIncorrect =true;
