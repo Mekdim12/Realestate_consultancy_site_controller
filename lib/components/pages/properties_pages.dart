@@ -77,124 +77,334 @@ class _PropertiesPageState extends State<PropertiesPage> {
         Container(
             margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: isPropertiesRealesate
-                ? Column(
-                    //  city
-                    // sub-city
-                    // description
-                    // units available
-                    // neigbourhood or street name
-                    // building_floor
-                    // price_sq
-                    // number of bed rooms
-                    // status
-                    // real estate name
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 100,
-                            child: Text(
-                              "Sub City",
-                              style: TextStyle(
-                                color: Colors.purple,
-                              ),
+                ? Container(
+                  height:  MediaQuery.of(context).size.height - 250,
+                  child: SingleChildScrollView(
+                            child: Column(
+                              //  city
+                              // sub-city
+                              // description
+                              // units available
+                              // neigbourhood or street name
+                              // building_floor
+                              // price_sq
+
+                              // number of bed rooms
+
+                              // status
+                              // real estate name
+                              children: [
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Sub City",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        // controller: _passwordOfAdmin,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                          
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(children: [
+                                  const SizedBox(
+                                    width: 100,
+                                    child: Text(
+                                      "Sub City",
+                                      style: TextStyle(
+                                        color: Colors.purple,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      margin:
+                                          const EdgeInsets.symmetric(horizontal: 10),
+                                      child: DropdownButton<String>(
+                                        value: selectedSubCity,
+                                        elevation: 10,
+                                        isExpanded: true,
+                                        iconEnabledColor:
+                                            Color.fromARGB(114, 104, 58, 183),
+                                        hint: Text('Sub City'),
+                                        items: listOfSubCity
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            selectedSubCity = newValue!;
+                                          });
+                                        },
+                                      ))
+                                ]),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Description",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        // controller: _passwordOfAdmin,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Units Available",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        keyboardType: TextInputType.number,
+                                        // controller: _passwordOfAdmin,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "St name",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Building Number",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        keyboardType: TextInputType.number,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Price",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        keyboardType: TextInputType.number,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Number of Bed Rooms",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        keyboardType: TextInputType.number,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 15),
+                                ),
+                                Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text(
+                                        "Real Estate Name",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width - 200,
+                                      child: const TextField(
+                                        keyboardType: TextInputType.number,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 16),
+                                        decoration: InputDecoration(
+                                          enabledBorder: UnderlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.purple)),
+                                        ),
+                                        cursorColor: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                //  submit button 
+                                Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 25),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width - 200,
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('Submit'),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 200,
-                            child: const TextField(
-                              // controller: _passwordOfAdmin,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16),
-                              decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.purple)),
-                                // icon: Icon(Icons.abc),
-                                // iconColor: Color.fromARGB(255, 85, 42, 92),
-                                // labelText: "City",
-                                // labelStyle: TextStyle(
-                                //   color: Colors.purple,
-                                // ),
-                              ),
-                              cursorColor: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                     
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 15),
-                      ),
-                      Row(children: [
-                        const SizedBox(
-                          width: 100,
-                          child: Text(
-                            "Sub City",
-                            style: TextStyle(
-                              color: Colors.purple,
-                            ),
-                          ),
-                        ),
-                        Container(
-                            width: MediaQuery.of(context).size.width - 200,
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: DropdownButton<String>(
-                              value: selectedSubCity,
-                              elevation: 10,
-                              isExpanded: true,
-                              iconEnabledColor:
-                                  Color.fromARGB(114, 104, 58, 183),
-                              hint: Text('Sub City'),
-                              items: listOfSubCity
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedSubCity = newValue!;
-                                });
-                              },
-                            ))
-                      ]),
-                       Row(
-                        children: [
-                          const SizedBox(
-                            width: 100,
-                            child: Text(
-                              "Description",
-                              style: TextStyle(
-                                color: Colors.purple,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 200,
-                            child: const TextField(
-                              // controller: _passwordOfAdmin,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16),
-                              decoration: InputDecoration(
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.purple)),
-                              ),
-                              cursorColor: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                     
-                    ],
-                  )
+                )
+                    
+                  
                 : Text('Vehicle')),
       ]),
     );
