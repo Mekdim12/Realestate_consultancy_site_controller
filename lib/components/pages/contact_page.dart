@@ -21,24 +21,21 @@ class _ContactUserPageState extends State<ContactUserPage> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            backgroundColor: Colors.white70,
+            backgroundColor: Colors.grey[50],
             bottom: const TabBar(
-              // indicatorColor: Colors.greenAccent,
+              indicatorColor: Colors.deepPurple,
               dividerColor: Colors.deepPurple,
-              // labelColor: Colors.greenAccent,
-              // indicatorSize: TabBarIndicatorSize.tab,
               labelColor: Colors.purple,
               tabs: [
                 Tab(
-                    text: "Text Based",
+                    text: "Contact Me",
                     icon: Icon(
                       Icons.contact_mail,
                       color: Colors.purple,
                     )),
                 Tab(
                   iconMargin: EdgeInsets.all(5),
-                  text: "Image Based",
-
+                  text: "Call Request",
                   icon: Icon(
                     Icons.call,
                     color: Colors.purple,
