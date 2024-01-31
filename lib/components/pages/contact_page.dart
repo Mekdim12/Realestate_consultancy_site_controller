@@ -8,47 +8,84 @@ class ContactUserPage extends StatefulWidget {
   State<ContactUserPage> createState() => _ContactUserPageState();
 }
 
-class CallRequestedClient{
+class CallRequestedClient {
   final bool status;
-  final String typeOfAnItem ;
-  final String id ;
+  final String typeOfAnItem;
+  final String id;
   final String clientName;
   final String clienEmail;
 
-const  CallRequestedClient({
-  required this.status,
-  required this.typeOfAnItem,
-  required this.id,
-  required this.clientName,
-  required this.clienEmail
-});
-
+  const CallRequestedClient(
+      {required this.status,
+      required this.typeOfAnItem,
+      required this.id,
+      required this.clientName,
+      required this.clienEmail});
 }
 
-class ContactMeMessage{
+class ContactMeMessage {
   final String clientFullName;
   final String clientEmail;
-  final String clientSubjectOfMessage ;
+  final String clientSubjectOfMessage;
   final String clienFullMessage;
 
-  const ContactMeMessage({
-    required this.clientFullName,
-    required this.clientEmail,
-    required this.clientSubjectOfMessage,
-    required this.clienFullMessage
-
-  });
-
+  const ContactMeMessage(
+      {required this.clientFullName,
+      required this.clientEmail,
+      required this.clientSubjectOfMessage,
+      required this.clienFullMessage});
 }
 
 class _ContactUserPageState extends State<ContactUserPage> {
-  //  list mock data 
-  final LIST_OF_CONTACT_ME_MESSAGES = [
+  //  list mock data
+  final LIST_OF_REQUESTED  = [
     CallRequestedClient(
-
+      status: true,
+      typeOfAnItem: "Real-estate",
+      id: "015",
+      clientName: "Mekdim Tamirat",
+      clienEmail: "mekdim@yahoo.com",
+    ),
+    CallRequestedClient(
+      status: true,
+      typeOfAnItem: "Vehicle",
+      id: "555",
+      clientName: "Mekdim Tamirat",
+      clienEmail: "mekdim@yahoo.com",
+    ),
+    CallRequestedClient(
+      status: true,
+      typeOfAnItem: "Real-estate",
+      id: "55",
+      clientName: "Mekdim Tamirat",
+      clienEmail: "mekdim@yahoo.com",
     )
+
   ];
 
+
+final LIST_OF_CONTACT_ME_MESSAGES = [
+    ContactMeMessage(
+      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+      clientEmail: "MEKDIM@GMAIL",
+      clientFullName: "mekdim Tamirat",
+      clientSubjectOfMessage: "my message"
+    ),
+    ContactMeMessage(
+      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+      clientEmail: "MEKDIM@GMAIL",
+      clientFullName: "Tamirat",
+      clientSubjectOfMessage: "my message"
+    ),
+    ContactMeMessage(
+      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+      clientEmail: "MEKDIM@GMAIL",
+      clientFullName: "Hasset Tamirat",
+        clientSubjectOfMessage: "my message"
+    ),
+
+
+];
   @override
   Widget build(BuildContext context) {
     return Container(
