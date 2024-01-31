@@ -9,23 +9,46 @@ class ContactUserPage extends StatefulWidget {
 }
 
 class CallRequestedClient{
-  bool status = true;
-  String typeOfAnItem = "";
-  String id = "";
-  String clientName = "";
-  String clienEmail = "";
+  final bool status;
+  final String typeOfAnItem ;
+  final String id ;
+  final String clientName;
+  final String clienEmail;
+
+const  CallRequestedClient({
+  required this.status,
+  required this.typeOfAnItem,
+  required this.id,
+  required this.clientName,
+  required this.clienEmail
+});
+
 }
 
 class ContactMeMessage{
-  String clientFullName = "";
-  String clientEmail = "";
-  String clientSubjectOfMessage =  "";
-  String clienFullMessage = "";
+  final String clientFullName;
+  final String clientEmail;
+  final String clientSubjectOfMessage ;
+  final String clienFullMessage;
+
+  const ContactMeMessage({
+    required this.clientFullName,
+    required this.clientEmail,
+    required this.clientSubjectOfMessage,
+    required this.clienFullMessage
+
+  });
 
 }
 
 class _ContactUserPageState extends State<ContactUserPage> {
-  
+  //  list mock data 
+  final LIST_OF_CONTACT_ME_MESSAGES = [
+    CallRequestedClient(
+
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
