@@ -8,7 +8,24 @@ class ContactUserPage extends StatefulWidget {
   State<ContactUserPage> createState() => _ContactUserPageState();
 }
 
+class CallRequestedClient{
+  bool status = true;
+  String typeOfAnItem = "";
+  String id = "";
+  String clientName = "";
+  String clienEmail = "";
+}
+
+class ContactMeMessage{
+  String clientFullName = "";
+  String clientEmail = "";
+  String clientSubjectOfMessage =  "";
+  String clienFullMessage = "";
+
+}
+
 class _ContactUserPageState extends State<ContactUserPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
