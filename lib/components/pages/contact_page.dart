@@ -1,6 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-
+import 'contact_me_detail_page.dart';
 class ContactUserPage extends StatefulWidget {
   const ContactUserPage({super.key});
 
@@ -86,7 +86,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
         clientFullName: "Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clienFullMessage: "LORE",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "Hasset Tamirat",
         clientSubjectOfMessage: "my message"),
@@ -159,7 +159,10 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                 : Text(
                                     "${currentItem.clientSubjectOfMessage.toString().substring(0, currentItem.clientSubjectOfMessage.toString().length)}..."),
                             trailing: ElevatedButton.icon(
-                              onPressed: () => {},
+                              onPressed: () {
+                                print(currentItem.clientFullName);
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ContactMeDetailPage(currentItem)));
+                              },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),
                               label: const Text(''),
