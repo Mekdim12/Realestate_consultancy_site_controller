@@ -14,13 +14,15 @@ class CallRequestedClient {
   final String id;
   final String clientName;
   final String clienEmail;
+  final String phoneNumber;
 
   const CallRequestedClient(
       {required this.status,
       required this.typeOfAnItem,
       required this.id,
       required this.clientName,
-      required this.clienEmail});
+      required this.clienEmail,
+      required this.phoneNumber});
 }
 
 class ContactMeMessage {
@@ -40,26 +42,26 @@ class _ContactUserPageState extends State<ContactUserPage> {
   //  list mock data
   final LIST_OF_REQUESTED_PHONE_CALL = [
     const CallRequestedClient(
-      status: true,
-      typeOfAnItem: "Real-estate",
-      id: "015",
-      clientName: "Mekdim Tamirat",
-      clienEmail: "mekdim@yahoo.com",
-    ),
+        status: true,
+        typeOfAnItem: "Real-estate",
+        id: "015",
+        clientName: "Mekdim Tamirat",
+        clienEmail: "mekdim@yahoo.com",
+        phoneNumber: "0924041650"),
     const CallRequestedClient(
-      status: true,
-      typeOfAnItem: "Vehicle",
-      id: "555",
-      clientName: "Mekdim Tamirat",
-      clienEmail: "mekdim@yahoo.com",
-    ),
+        status: true,
+        typeOfAnItem: "Vehicle",
+        id: "555",
+        clientName: "Mekdim Tamirat",
+        clienEmail: "mekdim@yahoo.com",
+        phoneNumber: "0924041650"),
     const CallRequestedClient(
-      status: true,
-      typeOfAnItem: "Real-estate",
-      id: "55",
-      clientName: "Mekdim Tamirat",
-      clienEmail: "mekdim@yahoo.com",
-    )
+        status: true,
+        typeOfAnItem: "Real-estate",
+        id: "55",
+        clientName: "Mekdim Tamirat",
+        clienEmail: "mekdim@yahoo.com",
+        phoneNumber: "0924041650")
   ];
 
   final LIST_OF_CONTACT_ME_MESSAGES = [
@@ -128,7 +130,6 @@ class _ContactUserPageState extends State<ContactUserPage> {
           body: TabBarView(children: [
             (LIST_OF_CONTACT_ME_MESSAGES.length > 0)
                 ? Container(
-                    
                     margin: const EdgeInsets.only(
                         bottom: 10, left: 10, right: 10, top: 30),
                     height: screenHeight - 400,
@@ -141,7 +142,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
                             iconColor: Colors.purple,
                             selectedColor: Colors.deepPurple,
                             enableFeedback: true,
-                            hoverColor:const  Color.fromARGB(89, 104, 58, 183),
+                            hoverColor: const Color.fromARGB(89, 104, 58, 183),
                             contentPadding: const EdgeInsets.all(5),
                             title: Text(
                               currentItem.clientFullName,
@@ -151,7 +152,8 @@ class _ContactUserPageState extends State<ContactUserPage> {
                             ),
                             subtitle: (currentItem.clientSubjectOfMessage
                                         .toString()
-                                        .length > 50)
+                                        .length >
+                                    50)
                                 ? Text(
                                     "${currentItem.clientSubjectOfMessage.toString().substring(0, 50)}...")
                                 : Text(
@@ -185,7 +187,45 @@ class _ContactUserPageState extends State<ContactUserPage> {
                     ),
                   ),
             (LIST_OF_REQUESTED_PHONE_CALL.length > 0)
-                ? Text("ME")
+                ? Container(
+                    margin: const EdgeInsets.only(
+                        bottom: 10, left: 10, right: 10, top: 30),
+                    height: screenHeight - 400,
+                    child: ListView.builder(
+
+                        itemCount: LIST_OF_REQUESTED_PHONE_CALL.length,
+                        itemBuilder: (context, index) {
+                          var currentItem = LIST_OF_REQUESTED_PHONE_CALL[index];
+                          return ListTile(
+                            onTap: () => {},
+                            iconColor: Colors.purple,
+                            selectedColor: Colors.deepPurple,
+                            enableFeedback: true,
+                            hoverColor: const Color.fromARGB(89, 104, 58, 183),
+                            contentPadding: const EdgeInsets.all(5),
+                            title: Text(
+                              currentItem.clientName,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.purple),
+                            ),
+                            subtitle: (currentItem.typeOfAnItem
+                                        .toString()
+                                        .length >
+                                    50)
+                                ? Text(
+                                    "${currentItem.typeOfAnItem.toString().substring(0, 50)}...")
+                                : Text(
+                                    "${currentItem.typeOfAnItem.toString().substring(0, currentItem.typeOfAnItem.toString().length)}..."),
+                            trailing: ElevatedButton.icon(
+                              onPressed: () => {},
+                              icon:
+                                  const Icon(Icons.arrow_circle_right_rounded),
+                              label: const Text(''),
+                            ),
+                          );
+                        }),
+                  )
                 : Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
