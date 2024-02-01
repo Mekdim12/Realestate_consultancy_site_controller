@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         Icon(Icons.post_add, color: Colors.white),
         Icon(Icons.add_card, color: Colors.white),
         Icon(Icons.home, color: Colors.white),
-        Icon(Icons.contact_page, color: Colors.white),
+        Icon(Icons.message, color: Colors.white),
         Icon(Icons.account_circle_rounded, color: Colors.white)
        ],
 

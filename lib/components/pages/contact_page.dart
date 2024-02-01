@@ -38,54 +38,47 @@ class ContactMeMessage {
 
 class _ContactUserPageState extends State<ContactUserPage> {
   //  list mock data
-  final LIST_OF_REQUESTED  = [
-    CallRequestedClient(
+  final LIST_OF_REQUESTED_PHONE_CALL = [
+    const CallRequestedClient(
       status: true,
       typeOfAnItem: "Real-estate",
       id: "015",
       clientName: "Mekdim Tamirat",
       clienEmail: "mekdim@yahoo.com",
     ),
-    CallRequestedClient(
+    const CallRequestedClient(
       status: true,
       typeOfAnItem: "Vehicle",
       id: "555",
       clientName: "Mekdim Tamirat",
       clienEmail: "mekdim@yahoo.com",
     ),
-    CallRequestedClient(
+    const CallRequestedClient(
       status: true,
       typeOfAnItem: "Real-estate",
       id: "55",
       clientName: "Mekdim Tamirat",
       clienEmail: "mekdim@yahoo.com",
     )
-
   ];
 
-
-final LIST_OF_CONTACT_ME_MESSAGES = [
-    ContactMeMessage(
-      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-      clientEmail: "MEKDIM@GMAIL",
-      clientFullName: "mekdim Tamirat",
-      clientSubjectOfMessage: "my message"
-    ),
-    ContactMeMessage(
-      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-      clientEmail: "MEKDIM@GMAIL",
-      clientFullName: "Tamirat",
-      clientSubjectOfMessage: "my message"
-    ),
-    ContactMeMessage(
-      clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-      clientEmail: "MEKDIM@GMAIL",
-      clientFullName: "Hasset Tamirat",
-        clientSubjectOfMessage: "my message"
-    ),
-
-
-];
+  final LIST_OF_CONTACT_ME_MESSAGES = [
+    const ContactMeMessage(
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clientEmail: "MEKDIM@GMAIL",
+        clientFullName: "mekdim Tamirat",
+        clientSubjectOfMessage: "my message"),
+    const ContactMeMessage(
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clientEmail: "MEKDIM@GMAIL",
+        clientFullName: "Tamirat",
+        clientSubjectOfMessage: "my message"),
+    const ContactMeMessage(
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clientEmail: "MEKDIM@GMAIL",
+        clientFullName: "Hasset Tamirat",
+        clientSubjectOfMessage: "my message"),
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -121,7 +114,48 @@ final LIST_OF_CONTACT_ME_MESSAGES = [
               ],
             ),
           ),
-          body: TabBarView(children: [Text("data"), Text("2")]),
+          body: TabBarView(children: [
+            (LIST_OF_CONTACT_ME_MESSAGES.length > 0)
+                ? Text("data")
+                : Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            image: AssetImage("assets/images/not_found.png")),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                        const Text(
+                          "There Is No New Message",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+            (LIST_OF_REQUESTED_PHONE_CALL.length > 0)?Text("ME"): Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Image(
+                            image: AssetImage("assets/images/not_found.png")),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                        const Text(
+                          "There Is No New Client Request For Contacting",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+          ]),
         ),
       ),
     );
