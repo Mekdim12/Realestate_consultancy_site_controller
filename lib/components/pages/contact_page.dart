@@ -71,6 +71,16 @@ class _ContactUserPageState extends State<ContactUserPage> {
     const ContactMeMessage(
         clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
+        clientFullName: "mekdim Tamirat",
+        clientSubjectOfMessage: "my message"),
+    const ContactMeMessage(
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clientEmail: "MEKDIM@GMAIL",
+        clientFullName: "mekdim Tamirat",
+        clientSubjectOfMessage: "my message"),
+    const ContactMeMessage(
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clientEmail: "MEKDIM@GMAIL",
         clientFullName: "Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
@@ -81,6 +91,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
   ];
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
@@ -116,7 +127,44 @@ class _ContactUserPageState extends State<ContactUserPage> {
           ),
           body: TabBarView(children: [
             (LIST_OF_CONTACT_ME_MESSAGES.length > 0)
-                ? Text("data")
+                ? Container(
+                    
+                    margin: const EdgeInsets.only(
+                        bottom: 10, left: 10, right: 10, top: 30),
+                    height: screenHeight - 400,
+                    child: ListView.builder(
+                        itemCount: LIST_OF_CONTACT_ME_MESSAGES.length,
+                        itemBuilder: (context, index) {
+                          var currentItem = LIST_OF_CONTACT_ME_MESSAGES[index];
+                          return ListTile(
+                            onTap: () => {},
+                            iconColor: Colors.purple,
+                            selectedColor: Colors.deepPurple,
+                            enableFeedback: true,
+                            hoverColor:const  Color.fromARGB(89, 104, 58, 183),
+                            contentPadding: const EdgeInsets.all(5),
+                            title: Text(
+                              currentItem.clientFullName,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.purple),
+                            ),
+                            subtitle: (currentItem.clientSubjectOfMessage
+                                        .toString()
+                                        .length > 50)
+                                ? Text(
+                                    "${currentItem.clientSubjectOfMessage.toString().substring(0, 50)}...")
+                                : Text(
+                                    "${currentItem.clientSubjectOfMessage.toString().substring(0, currentItem.clientSubjectOfMessage.toString().length)}..."),
+                            trailing: ElevatedButton.icon(
+                              onPressed: () => {},
+                              icon:
+                                  const Icon(Icons.arrow_circle_right_rounded),
+                              label: const Text(''),
+                            ),
+                          );
+                        }),
+                  )
                 : Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +184,9 @@ class _ContactUserPageState extends State<ContactUserPage> {
                       ],
                     ),
                   ),
-            (LIST_OF_REQUESTED_PHONE_CALL.length > 0)?Text("ME"): Center(
+            (LIST_OF_REQUESTED_PHONE_CALL.length > 0)
+                ? Text("ME")
+                : Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
