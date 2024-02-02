@@ -60,13 +60,12 @@ class _ContactMeDetailPageState extends State<ContactMeDetailPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container( child:Text("Full Message :", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple),),),
-                  Container(margin:const EdgeInsets.symmetric(horizontal: 10),),
-                  Container( child: Text(contact_message.clienFullMessage, style: TextStyle(fontWeight: FontWeight.w500),),)
+                 Container( width: screenwidth * 0.55, child: Text(contact_message.clienFullMessage, style: TextStyle(fontWeight: FontWeight.w500), softWrap: true, maxLines: 150, overflow: TextOverflow.fade,))
                 ],
               ),
-              Container(margin: EdgeInsets.symmetric(vertical: 5),),
+              Container(margin: EdgeInsets.symmetric(vertical: 50),),
 
-             ElevatedButton.icon(onPressed: ()=>{}, icon: Icon(Icons.delete), label:Text("Delete"))
+             ElevatedButton.icon(onPressed: ()=>{}, icon: Icon(Icons.delete, color: Colors.white,), label:Text("Delete"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),)
           ],
         ),
       )

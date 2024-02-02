@@ -66,7 +66,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
 
   final LIST_OF_CONTACT_ME_MESSAGES = [
     const ContactMeMessage(
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "mekdim Tamirat",
         clientSubjectOfMessage: "my message"),
@@ -157,7 +157,8 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                 ? Text(
                                     "${currentItem.clientSubjectOfMessage.toString().substring(0, 50)}...")
                                 : Text(
-                                    "${currentItem.clientSubjectOfMessage.toString().substring(0, currentItem.clientSubjectOfMessage.toString().length)}..."),
+                                    "${currentItem.clientSubjectOfMessage.toString().substring(0, currentItem.clientSubjectOfMessage.toString().length)}...",
+                                ),
                             trailing: ElevatedButton.icon(
                               onPressed: () {
                                 print(currentItem.clientFullName);
