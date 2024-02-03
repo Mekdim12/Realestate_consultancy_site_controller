@@ -1,5 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'call_request_detail_page.dart';
 import 'contact_me_detail_page.dart';
 class ContactUserPage extends StatefulWidget {
   const ContactUserPage({super.key});
@@ -161,7 +162,6 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                 ),
                             trailing: ElevatedButton.icon(
                               onPressed: () {
-                                print(currentItem.clientFullName);
                                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ContactMeDetailPage(currentItem)));
                               },
                               icon:
@@ -222,7 +222,9 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                 : Text(
                                     "${currentItem.typeOfAnItem.toString().substring(0, currentItem.typeOfAnItem.toString().length)}..."),
                             trailing: ElevatedButton.icon(
-                              onPressed: () => {},
+                              onPressed: (){
+                                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CallRequestDetailPage(currentItem)));
+                              },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),
                               label: const Text(''),
