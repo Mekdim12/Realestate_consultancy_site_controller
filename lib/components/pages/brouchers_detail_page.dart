@@ -25,10 +25,10 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
         ),
       ),
       body: Container(
-        width: double.infinity,
-        height: screenHeight,
-        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-        child: Column(
+      height: MediaQuery.of(context).size.height - 100,
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: SingleChildScrollView(
+        child:Column(
           children: [
             const TextField(
               cursorColor: Colors.purple,
@@ -174,6 +174,6 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
           ],
         ),
       ),
-    );
+    ),);
   }
 }

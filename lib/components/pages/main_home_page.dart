@@ -13,10 +13,11 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[50],
-        body: Container(
+      backgroundColor: Colors.grey[50],
+      body: Container(
+        height: MediaQuery.of(context).size.height - 100,
+        child: SingleChildScrollView(
             child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               margin: const EdgeInsets.all(20),
@@ -47,16 +48,18 @@ class _MainHomePageState extends State<MainHomePage> {
                     CardWidget(150, 100, "Companies", "56"),
                   ],
                 )),
-
-              Container(alignment: Alignment.center,
-                margin:const EdgeInsets.only(top:25),
-                child:CardWidget(
+            Container(
+                alignment: Alignment.center,
+                margin: const EdgeInsets.only(top: 25),
+                child: CardWidget(
                   300,
                   100,
                   "New Call Request",
                   "6",
                 ))
           ],
-        )));
+        )),
+      ),
+    );
   }
 }
