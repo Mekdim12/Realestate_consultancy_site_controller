@@ -1,6 +1,6 @@
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import '../small_components/card.dart';
+import '../../services/service_api_data_fetcher.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
@@ -12,6 +12,14 @@ class MainHomePage extends StatefulWidget {
 class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
+    ApiFetcherService apiFetcherService = ApiFetcherService();
+    var data;
+    apiFetcherService.fetchLandingPageStatusData().then((value) => 
+    data = value
+    );
+
+
+    
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: Container(
@@ -29,9 +37,9 @@ class _MainHomePageState extends State<MainHomePage> {
                     color: Colors.deepPurple,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: const Center(
+              child:  Center(
                 child: Text(
-                  "ETB 1,000,545,525 🤩",
+                  "ETB ${data.total_sales} 🤩",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,

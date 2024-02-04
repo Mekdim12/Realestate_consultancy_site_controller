@@ -7,6 +7,8 @@ import 'pages/contact_page.dart';
 import 'pages/profile_page.dart';
 import 'pages/properties_pages.dart';
 
+
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,9 +18,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selected_index_page_sync_value_holder  = 2; // default value is 2 for home page
+ 
+  
   @override
   Widget build(BuildContext context) {
-   
+    // ApiFetcherService apiFetcherService = ApiFetcherService();
+
     final screen_pages = <Widget>[
         BrouchersPage(),
         PropertiesPage(),
