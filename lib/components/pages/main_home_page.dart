@@ -13,7 +13,7 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     ApiFetcherService apiFetcherService = ApiFetcherService();
-    var data;
+    var  data;
     apiFetcherService.fetchLandingPageStatusData().then((value) => 
     data = value
     );
