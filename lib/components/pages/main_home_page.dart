@@ -13,14 +13,17 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     ApiFetcherService apiFetcherService = ApiFetcherService();
-    var  data;
-    apiFetcherService.fetchLandingPageStatusData().then((value) => 
-    data = value
-    );
-
-
     
-    return Scaffold(
+
+  return FutureBuilder(
+    future: apiFetcherService.fetchLandingPageStatusData(),
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return CircularProgressIndicator(); // Show loading while waiting for data
+      } else if (snapshot.hasError) {
+        return Text('Error: ${snapshot.error}'); // Show error if any
+      } else {
+        return  Scaffold(
       backgroundColor: Colors.grey[50],
       body: Container(
         height: MediaQuery.of(context).size.height - 100,
@@ -39,7 +42,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child:  Center(
                 child: Text(
-                  "ETB ${data.total_sales} 🤩",
+                  "ETB ${snapshot.data['total_sales'].toString()} 🤩",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -52,8 +55,8 @@ class _MainHomePageState extends State<MainHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CardWidget(150, 100, "Avg Price", "5984"),
-                    CardWidget(150, 100, "Companies", "56"),
+                    CardWidget(150, 100, "Avg Price", snapshot.data['average_sold_price'].toString()),
+                    CardWidget(150, 100, "Companies", snapshot.data['companies'].toString()),
                   ],
                 )),
             Container(
@@ -63,11 +66,17 @@ class _MainHomePageState extends State<MainHomePage> {
                   300,
                   100,
                   "New Call Request",
-                  "6",
+                snapshot.data['call_request'].toString(),
                 ))
           ],
         )),
       ),
     );
-  }
+ 
+      }
+    });
+    
+
+    
+ }
 }
