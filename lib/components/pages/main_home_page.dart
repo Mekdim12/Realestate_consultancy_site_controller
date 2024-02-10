@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../small_components/card.dart';
 import '../../services/service_api_data_fetcher.dart';
-
+import 'package:intl/intl.dart';
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
 
@@ -10,19 +10,30 @@ class MainHomePage extends StatefulWidget {
 }
 
 class _MainHomePageState extends State<MainHomePage> {
+   ApiFetcherService apiFetcherService = ApiFetcherService();
+   
   @override
   Widget build(BuildContext context) {
-    ApiFetcherService apiFetcherService = ApiFetcherService();
     
 
   return FutureBuilder(
     future: apiFetcherService.fetchLandingPageStatusData(),
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator(); // Show loading while waiting for data
+        return Center(child: CircularProgressIndicator()); // Show loading while waiting for data
       } else if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}'); // Show error if any
       } else {
+        
+         if (snapshot.data.isEmpty) {
+            snapshot.data['total_sales'] = 0;
+            snapshot.data['average_sold_price'] = 0;
+            snapshot.data['companies'] = 0;
+            snapshot.data['call_request'] = 0;
+          }   
+          final formatter = NumberFormat('#,###');
+          String formattedTotalSales = formatter.format(int.parse(snapshot.data['total_sales'].toString()));   
+          String formatterForAvgPrice = formatter.format(int.parse(snapshot.data['average_sold_price'].toString()));  
         return  Scaffold(
       backgroundColor: Colors.grey[50],
       body: Container(
@@ -42,7 +53,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child:  Center(
                 child: Text(
-                  "ETB ${snapshot.data['total_sales'].toString()} 🤩",
+                  "ETB $formattedTotalSales 🤩",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -55,7 +66,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CardWidget(150, 100, "Avg Price", snapshot.data['average_sold_price'].toString()),
+                    CardWidget(150, 100, "Avg Price", "\$ $formatterForAvgPrice"),
                     CardWidget(150, 100, "Companies", snapshot.data['companies'].toString()),
                   ],
                 )),
