@@ -2,6 +2,8 @@
 // import json and http package
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../models/brouchersAndSpecialOffer.dart';
+import 'package:flutter/material.dart';
 
 class ApiFetcherService{
   Future fetchLandingPageStatusData() async {
@@ -51,22 +53,26 @@ class ApiFetcherService{
                 return true;
               }
               return false;
-
-              // rewrite the same logic using dio package
-              // FormData formData = FormData.fromMap({
-              //   "title": nameOfTheFile,
-              //   "description": description,
-              //   "type": type,
-              //   "image": await MultipartFile.fromFile(filePath, filename: "upload.jpg"),
-              // }); 
-
-              // var response = await Dio().post('http://");
-              // if (response.statusCode == 200) {
-              //   return json.decode(response.toString());
-              // }
-
-
-
     } 
-}
+    Future fetchBrouchersAndBestOfferes() async {
+       Uri url = Uri.parse('http://127.0.0.1:8000/api/broucher');
+       final response = await http.get(url);
+       
+        if(response.body.isEmpty){
+          return [];
+        }
 
+        final parsed = jsonDecode(response.body);
+      
+        return BrouchersData.fromJsonList(parsed);
+        
+      }
+
+      Future deleteBrocuherAndBestofferitem(String id) async{
+         Uri url = Uri.parse('http://127.0.0.1:8000/api/broucher');
+          await http.delete(url, body: {
+            'id': id
+          });
+      }
+
+}
