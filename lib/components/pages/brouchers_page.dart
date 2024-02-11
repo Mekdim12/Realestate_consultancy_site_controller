@@ -14,8 +14,14 @@ class BrouchersPage extends StatefulWidget {
 
 class _BrouchersPageState extends State<BrouchersPage> {
   ApiFetcherService apiService = ApiFetcherService();
-  List listOfBroucherItems = [];
-  
+  List<BrouchersData> listOfBroucherItems = [];
+
+  void updateList(List<BrouchersData> newList) {
+    setState(() {
+      listOfBroucherItems = newList;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -31,13 +37,19 @@ class _BrouchersPageState extends State<BrouchersPage> {
             return Text('Error: ${snapshot.error}'); // Show error if any
           } else {
             listOfBroucherItems = snapshot.data;
-           
+
             bool is_image_available = listOfBroucherItems.length > 0;
             return Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const BrouchersDetailPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BrouchersDetailPage(updateList)),
+                  );
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => const BrouchersDetailPage()));
                 },
                 backgroundColor: Colors.purple,
                 child: const Icon(Icons.add),
@@ -67,7 +79,8 @@ class _BrouchersPageState extends State<BrouchersPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                       image: NetworkImage(
-                                          listOfBroucherItems[itemIndex].filePath),
+                                          listOfBroucherItems[itemIndex]
+                                              .filePath),
                                       fit: BoxFit.fitWidth),
                                 ),
                               );
@@ -105,14 +118,12 @@ class _BrouchersPageState extends State<BrouchersPage> {
                                     : Text(
                                         "${currentItem.description.toString().substring(0, currentItem.description.toString().length)}..."),
                                 trailing: ElevatedButton.icon(
-                                  onPressed: (){
+                                  onPressed: () {
                                     apiService.deleteBrocuherAndBestofferitem(
-                                        currentItem.id.toString()
-                                    );
+                                        currentItem.id.toString());
                                     setState(() {
-                                          listOfBroucherItems.removeAt(index);
-                                      });
-                                    
+                                      listOfBroucherItems.removeAt(index);
+                                    });
                                   },
                                   icon: const Icon(Icons.delete),
                                   label: const Text(''),
@@ -120,8 +131,6 @@ class _BrouchersPageState extends State<BrouchersPage> {
                               );
                             }),
                       )
-                   
-                   
                     ])
                   : SizedBox(
                       width: double.infinity,

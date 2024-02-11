@@ -6,9 +6,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/service_api_data_fetcher.dart';
+import 'brouchers_page.dart';
 
 class BrouchersDetailPage extends StatefulWidget {
-  const BrouchersDetailPage({super.key});
+  final Function updateList;
+  BrouchersDetailPage(this.updateList, {super.key});
 
   @override
   State<BrouchersDetailPage> createState() => _BrouchersDetailPageState();
@@ -16,6 +18,7 @@ class BrouchersDetailPage extends StatefulWidget {
 
 class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
   String CurrentSelectedChoice = "other";
+  Function? updateList;
   //  create a variable to hold image file path from file picker
   File? _imageFile;
   final TextEditingController _titleController = TextEditingController();
@@ -32,6 +35,7 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    updateList = widget.updateList;
 
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +52,7 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
               TextField(
                 controller: _titleController,
                 cursorColor: Colors.purple,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.purple)),
                   icon: Icon(Icons.abc_rounded),
@@ -65,8 +69,8 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
               TextField(
                 controller: _descriptionController,
                 cursorColor: Colors.purple,
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
+                decoration: const InputDecoration(
+                  enabledBorder:  UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.purple)),
                   icon: Icon(Icons.abc_rounded),
                   iconColor: Color.fromARGB(255, 85, 42, 92),
@@ -210,12 +214,17 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
                         CurrentSelectedChoice,
                         _imageFile!.path,
                       );
+                      
                       String responseMessage = "";
                       //  show a toast message that the data is saved
                       if (response) {
+                        // update the list
+                        //  call the api to fetch all the data and update the list
+                       
+                        updateList!( await apiService.fetchBrouchersAndBestOfferes());
                         responseMessage =
                             "Brocuhers Information save successfully";
-                      } else {
+                        } else {
                         responseMessage =
                             "Data is not saved, please try again later";
                       }
