@@ -15,76 +15,7 @@ class BrouchersPage extends StatefulWidget {
 class _BrouchersPageState extends State<BrouchersPage> {
   ApiFetcherService apiService = ApiFetcherService();
   List listOfBroucherItems = [];
-  // fall back as place holder for image slider in brouchers page
-  // final list_of_brouchers_of_offers = [
-  //   "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/3646108/pexels-photo-3646108.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/3879065/pexels-photo-3879065.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/1841120/pexels-photo-1841120.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/3608542/pexels-photo-3608542.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/3786092/pexels-photo-3786092.jpeg?auto=compress&cs=tinysrgb&w=600",
-  //   "https://images.pexels.com/photos/3166786/pexels-photo-3166786.jpeg?auto=compress&cs=tinysrgb&w=600"
-  // ];
-
-  //  local dev place for slider image when working with no internet
-  // final list_of_brouchers_of_offers = [
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png'),
-  //   AssetImage('assets/images/not_found.png')
-  // ];
-
-  // list_of_brouchers_of_offers =
-
-  // final listOfBroucherItems = [
-  //  const BrouchersData(
-  //     nameOfTheFile:"Mekdim Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type:"main"
-  //   ),
-  //   const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-  //   const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-  //    const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-  //    const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-  //    const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-  //    const BrouchersData(
-  //    nameOfTheFile:"Etsub Tamirat",
-  //     filePath:"assets/images/not_found.png",
-  //     descritpion: "This lorem Ipsum Identification",
-  //     type :"other"
-  //   ),
-
-  // ];
-
+  
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
