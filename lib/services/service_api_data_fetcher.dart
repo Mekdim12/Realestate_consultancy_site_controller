@@ -75,4 +75,14 @@ class ApiFetcherService{
           });
       }
 
+
+      Future fetchContactMe() async{
+        Uri url = Uri.parse('http://127.0.0.1:8000/api/contact');
+        final response = await http.get(url);
+        if (response.statusCode == 200) {
+          return json.decode(response.body);
+        }
+        return [];
+      }
+
 }
