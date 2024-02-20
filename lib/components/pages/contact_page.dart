@@ -2,6 +2,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'call_request_detail_page.dart';
 import 'contact_me_detail_page.dart';
+import  '../../models/contactsMe.dart';
+import '../../models/clientCallRequest.dart';
+import '../../services/service_api_data_fetcher.dart';
+
+
 class ContactUserPage extends StatefulWidget {
   const ContactUserPage({super.key});
 
@@ -9,37 +14,15 @@ class ContactUserPage extends StatefulWidget {
   State<ContactUserPage> createState() => _ContactUserPageState();
 }
 
-class CallRequestedClient {
-  final bool status;
-  final String typeOfAnItem;
-  final String id;
-  final String clientName;
-  final String clienEmail;
-  final String phoneNumber;
-
-  const CallRequestedClient(
-      {required this.status,
-      required this.typeOfAnItem,
-      required this.id,
-      required this.clientName,
-      required this.clienEmail,
-      required this.phoneNumber});
-}
-
-class ContactMeMessage {
-  final String clientFullName;
-  final String clientEmail;
-  final String clientSubjectOfMessage;
-  final String clienFullMessage;
-
-  const ContactMeMessage(
-      {required this.clientFullName,
-      required this.clientEmail,
-      required this.clientSubjectOfMessage,
-      required this.clienFullMessage});
-}
-
 class _ContactUserPageState extends State<ContactUserPage> {
+  @override
+  void initState(){
+    // apiService.fetchBrouchersAndBestOfferes();
+    super.initState();
+    // fetchContactMe().
+
+
+  }
   //  list mock data
   final LIST_OF_REQUESTED_PHONE_CALL = [
     const CallRequestedClient(
@@ -67,26 +50,31 @@ class _ContactUserPageState extends State<ContactUserPage> {
 
   final LIST_OF_CONTACT_ME_MESSAGES = [
     const ContactMeMessage(
+        id:"1",
         clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "mekdim Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
+        id:"2",
         clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "mekdim Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
+        id:"3",
         clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "mekdim Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
+        id:"4",
         clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "Tamirat",
         clientSubjectOfMessage: "my message"),
     const ContactMeMessage(
+        id:"5",
         clienFullMessage: "LORE",
         clientEmail: "MEKDIM@GMAIL",
         clientFullName: "Hasset Tamirat",
@@ -94,6 +82,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
   ];
   @override
   Widget build(BuildContext context) {
+
     final double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.zero,
