@@ -5,7 +5,7 @@ import 'pages/main_home_page.dart';
 import 'pages/brouchers_page.dart';
 import 'pages/contact_page.dart';
 import 'pages/profile_page.dart';
-import 'pages/properties_pages.dart';
+import 'pages/properties_main_page.dart';
 
 
 
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
     final screen_pages = <Widget>[
         BrouchersPage(),
-        PropertiesPage(),
+        PropertiesMainPage(),
         MainHomePage(),
         ContactUserPage(),
         ProfilePage()
