@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class BrouchersData{
   final String nameOfTheFile; // tittle
   final String filePath; // image
