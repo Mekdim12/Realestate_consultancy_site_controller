@@ -48,8 +48,6 @@ class _BrouchersPageState extends State<BrouchersPage> {
                         builder: (context) =>
                             BrouchersDetailPage(updateList)),
                   );
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //     builder: (context) => const BrouchersDetailPage()));
                 },
                 backgroundColor: Colors.purple,
                 child: const Icon(Icons.add),
