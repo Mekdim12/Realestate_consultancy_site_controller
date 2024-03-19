@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import './properties_pages.dart';
 import '../../services/service_api_data_fetcher.dart';
+import '../../models/brouchersAndSpecialOffer.dart';
 
 class PropertiesMainPage extends StatefulWidget {
   const PropertiesMainPage({super.key});
@@ -21,7 +22,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
         future: apiService.fetchBrouchersAndBestOfferes(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
                 child:
                     CircularProgressIndicator()); // Show loading while waiting for data
           } else if (snapshot.hasError) {
@@ -33,12 +34,12 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
             return Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) =>
-                  //           BrouchersDetailPage(updateList)),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PropertiesPage()),
+                  );
                 },
                 backgroundColor: Colors.purple,
                 child: const Icon(Icons.add),
