@@ -22,8 +22,7 @@ final String realstateCompanyName;
     required this.buildingFloors,
     required this.pricePerSq,
     required this.numberOfBedrooms,
-
-
+  
   });
 }
 
@@ -32,6 +31,3 @@ class PropertyRealstateData{
 
 
 }
-
-status = models.CharField(max_length=100)
-real_state_company_name = models.CharField(max_length=100)
