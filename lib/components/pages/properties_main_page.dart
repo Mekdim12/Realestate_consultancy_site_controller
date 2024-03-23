@@ -3,6 +3,9 @@ import './properties_pages.dart';
 import '../../services/service_api_data_fetcher.dart';
 import '../../models/brouchersAndSpecialOffer.dart';
 
+import '../../models/properties.dart';
+
+
 class PropertiesMainPage extends StatefulWidget {
   const PropertiesMainPage({super.key});
 
@@ -12,25 +15,31 @@ class PropertiesMainPage extends StatefulWidget {
 
 class _PropertiesMainPageState extends State<PropertiesMainPage> {
   ApiFetcherService apiService = ApiFetcherService();
-  List<BrouchersData> listOfBroucherItems = [];
+  List listOfPropertiesItems = [];
   
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return FutureBuilder(
-        future: apiService.fetchBrouchersAndBestOfferes(),
+        future:apiService.fetchProperties(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
                 child:
                     CircularProgressIndicator()); // Show loading while waiting for data
           } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}'); // Show error if any
+            return Text('Error: ${snapshot.error}'); // Show error ifc any
           } else {
-            listOfBroucherItems = snapshot.data;
-
-            bool is_image_available = listOfBroucherItems.length > 0;
+            print( snapshot.data);
+            print("-------------------------------------------->");
+            // listOfBroucherItems = snapshot.data;
+            listOfPropertiesItems = snapshot.data;
+            print(listOfPropertiesItems);
+            // return Scaffold(
+            //   body: Center(child: Text('No Properties Found')),
+            // );
+            bool is_image_available = listOfPropertiesItems.length > 0;
             return Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
