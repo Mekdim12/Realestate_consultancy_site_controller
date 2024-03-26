@@ -50,7 +50,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                   isPropertiesRealesate = false;
                 }
               });
-              print(isPropertiesRealesate);
+              
             },
             items: const [
               DropdownMenuItem(
@@ -83,18 +83,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                     height: MediaQuery.of(context).size.height - 250,
                     child: SingleChildScrollView(
                       child: Column(
-                        //  city
-                        // sub-city
-                        // description
-                        // units available
-                        // neigbourhood or street name
-                        // building_floor
-                        // price_sq
-
-                        // number of bed rooms
-
-                        // status
-                        // real estate name
+                        
                         children: [
                           Row(
                             children: [
