@@ -72,7 +72,9 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                     (BuildContext context, int subIndex) {
                                       var subItem = currentItem[subIndex];
                                       Widget currentTile;
+                                      
                                       if (subItem is PropertyRealstateData) {
+                                       
                                         // Handle PropertyRealstateData
                                         currentTile = Container(
                                           margin: EdgeInsets.only(bottom: 10),
@@ -131,13 +133,14 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                         currentTile = ListTile();
                                       }
 
+
                                       return InkWell(
                                         onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PropertiesDetailPage(1, "")),
+                                                    PropertiesDetailPage(subItem)),
                                           );
                                         },
                                         child: currentTile,
