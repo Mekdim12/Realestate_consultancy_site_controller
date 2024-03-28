@@ -23,6 +23,11 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
         title: const Center(
           child: Text("Property Detail"),
         ),
+        actions: [
+          ElevatedButton.icon(onPressed: (){
+
+          }, icon: const Icon(Icons.delete, ), label: Text(""), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.purple)),)
+        ],
       ),
       body: Center(
         child: Text("data"),
