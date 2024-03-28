@@ -10,7 +10,7 @@ class PropertyRealstateData {
   final String lastUpdate;
   final String status;
   final String realstateCompanyName;
-  final String propertyImage;
+  final List propertyImage;
   final String id;
 
   const PropertyRealstateData({
@@ -64,7 +64,7 @@ class PropertyVehiclesData {
   final String lastUpdate;
   final String userOrNew;
   final String status;
-  final String vehicleImage;
+  final List vehicleImage;
   final String id;
 
   const PropertyVehiclesData({
