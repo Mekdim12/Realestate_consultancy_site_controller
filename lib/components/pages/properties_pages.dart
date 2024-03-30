@@ -28,383 +28,85 @@ class _PropertiesPageState extends State<PropertiesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
-        Container(
-          width: 250,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: DropdownButton<String>(
-            elevation: 10,
-            isExpanded: true,
-            iconEnabledColor: Colors.deepPurple,
-            iconSize: 30,
-            icon: const Icon(Icons.menu_book),
-            value: CurrentSelectedChoice, // use the variable as the value
-            onChanged: (String? newValue) {
-              setState(() {
-                CurrentSelectedChoice = newValue!;
-
-                if (CurrentSelectedChoice == '1') {
-                  isPropertiesRealesate = true;
-                } else {
-                  isPropertiesRealesate = false;
-                }
-              });
-              
-            },
-            items: const [
-              DropdownMenuItem(
-                // enabled: true,
-                alignment: Alignment.center,
-                value: '1',
-                child: Text(
-                  'Real Estate',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'quickSand', fontWeight: FontWeight.w600),
-                ),
-              ),
-              DropdownMenuItem(
-                alignment: Alignment.center,
-                value: '2',
-                child: Text(
-                  'Vehicle',
-                  style: TextStyle(
-                      fontFamily: 'quickSand', fontWeight: FontWeight.w600),
-                ),
-              ),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text("Property Detail"),
         ),
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: isPropertiesRealesate
-                ? Container(
-                    height: MediaQuery.of(context).size.height - 250,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        
-                        children: [
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "City",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  // controller: _passwordOfAdmin,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(children: [
-                            const SizedBox(
-                              width: 100,
-                              child: Text(
-                                "Sub City",
-                                style: TextStyle(
-                                  color: Colors.purple,
-                                ),
-                              ),
-                            ),
-                            Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                child: DropdownButton<String>(
-                                  value: selectedSubCity,
-                                  elevation: 10,
-                                  isExpanded: true,
-                                  iconEnabledColor:
-                                      Color.fromARGB(114, 104, 58, 183),
-                                  hint: Text('Sub City'),
-                                  items: listOfSubCity
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      selectedSubCity = newValue!;
-                                    });
-                                  },
-                                ))
-                          ]),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Description",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  // controller: _passwordOfAdmin,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Units Available",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  keyboardType: TextInputType.number,
-                                  // controller: _passwordOfAdmin,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "St name",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Building Number",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Price",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Number of Bed Rooms",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 15),
-                          ),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Real Estate Name",
-                                  style: TextStyle(
-                                    color: Colors.purple,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
-                                  keyboardType: TextInputType.number,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16),
-                                  decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.purple)),
-                                  ),
-                                  cursorColor: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
+        actions: [
+          ElevatedButton.icon(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.delete,
+            ),
+            label: Text(""),
+            style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.purple)),
+          )
+        ],
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top: 20),
+        child: Column(children: [
+          Container(
+            width: 250,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: DropdownButton<String>(
+              elevation: 10,
+              isExpanded: true,
+              iconEnabledColor: Colors.deepPurple,
+              iconSize: 30,
+              icon: const Icon(Icons.menu_book),
+              value: CurrentSelectedChoice, // use the variable as the value
+              onChanged: (String? newValue) {
+                setState(() {
+                  CurrentSelectedChoice = newValue!;
 
-                          //  submit button
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 30),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width - 200,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Text('Submit'),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                : 
-                Container(
-                    height: MediaQuery.of(context).size.height - 250,
-                    child: SingleChildScrollView(
-                      child: Column(
+                  if (CurrentSelectedChoice == '1') {
+                    isPropertiesRealesate = true;
+                  } else {
+                    isPropertiesRealesate = false;
+                  }
+                });
+              },
+              items: const [
+                DropdownMenuItem(
+                  // enabled: true,
+                  alignment: Alignment.center,
+                  value: '1',
+                  child: Text(
+                    'Real Estate',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'quickSand', fontWeight: FontWeight.w600),
+                  ),
+                ),
+                DropdownMenuItem(
+                  alignment: Alignment.center,
+                  value: '2',
+                  child: Text(
+                    'Vehicle',
+                    style: TextStyle(
+                        fontFamily: 'quickSand', fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: isPropertiesRealesate
+                  ? Container(
+                      height: MediaQuery.of(context).size.height - 150,
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
                             Row(
                               children: [
                                 const SizedBox(
                                   width: 100,
                                   child: Text(
-                                    "Brand Name",
+                                    "City",
                                     style: TextStyle(
                                       color: Colors.purple,
                                     ),
@@ -432,36 +134,43 @@ class _PropertiesPageState extends State<PropertiesPage> {
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 15),
                             ),
-                            Row(
-                              children: [
-                                const SizedBox(
-                                  width: 100,
-                                  child: Text(
-                                    "Color",
-                                    style: TextStyle(
-                                      color: Colors.purple,
-                                    ),
+                            Row(children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Sub City",
+                                  style: TextStyle(
+                                    color: Colors.purple,
                                   ),
                                 ),
-                                Container(
+                              ),
+                              Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
-                                    // controller: _passwordOfAdmin,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 16),
-                                    decoration: InputDecoration(
-                                      enabledBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.purple)),
-                                    ),
-                                    cursorColor: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: DropdownButton<String>(
+                                    value: selectedSubCity,
+                                    elevation: 10,
+                                    isExpanded: true,
+                                    iconEnabledColor:
+                                        Color.fromARGB(114, 104, 58, 183),
+                                    hint: Text('Sub City'),
+                                    items: listOfSubCity
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        selectedSubCity = newValue!;
+                                      });
+                                    },
+                                  ))
+                            ]),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 15),
                             ),
@@ -503,7 +212,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 const SizedBox(
                                   width: 100,
                                   child: Text(
-                                    "Unites avialbel",
+                                    "Units Available",
                                     style: TextStyle(
                                       color: Colors.purple,
                                     ),
@@ -513,7 +222,72 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
+                                    keyboardType: TextInputType.number,
                                     // controller: _passwordOfAdmin,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16),
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.purple)),
+                                    ),
+                                    cursorColor: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 15),
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "St name",
+                                    style: TextStyle(
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 200,
+                                  child: const TextField(
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16),
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.purple)),
+                                    ),
+                                    cursorColor: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 15),
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "Building Number",
+                                    style: TextStyle(
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 200,
+                                  child: const TextField(
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -547,7 +321,6 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
-                                    // controller: _passwordOfAdmin,
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -566,93 +339,71 @@ class _PropertiesPageState extends State<PropertiesPage> {
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 15),
                             ),
-                            Row(children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Condition",
-                                  style: TextStyle(
-                                    color: Colors.purple,
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "Number of Bed Rooms",
+                                    style: TextStyle(
+                                      color: Colors.purple,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
+                                Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: DropdownButton<String>(
-                                    value: statusOfVehicle,
-                                    elevation: 10,
-                                    isExpanded: true,
-                                    iconEnabledColor:
-                                        Color.fromARGB(114, 104, 58, 183),
-                                    hint: Text('Condition'),
-                                    items: ["NEW", "USED", "SLIGHTLY USED"]
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        statusOfVehicle = newValue!;
-                                      });
-                                    },
-                                  ))
-                            ]),
+                                  child: const TextField(
+                                    keyboardType: TextInputType.number,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16),
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.purple)),
+                                    ),
+                                    cursorColor: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 15),
                             ),
-                            Row(children: [
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Condition",
-                                  style: TextStyle(
-                                    color: Colors.purple,
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 100,
+                                  child: Text(
+                                    "Real Estate Name",
+                                    style: TextStyle(
+                                      color: Colors.purple,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
+                                Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: DropdownButton<String>(
-                                    value: plateNumberLabeledCity,
-                                    elevation: 10,
-                                    isExpanded: true,
-                                    iconEnabledColor:
-                                        Color.fromARGB(114, 104, 58, 183),
-                                    hint: const Text('Plate Number City'),
-                                    items: [
-                                      "Amhara",
-                                      "Addis Ababa",
-                                      "Eritrea",
-                                      "Oromia",
-                                      "Harar",
-                                      "Tigray",
-                                      "Somali",
-                                      "Benishangul",
-                                      "Gambela"
-                                    ].map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String? newValue) {
-                                      // map the list of the country to thier abbr for storing
-                                      setState(() {
-                                        plateNumberLabeledCity = newValue!;
-                                      });
-                                    },
-                                  ))
-                            ]),
+                                  child: const TextField(
+                                    keyboardType: TextInputType.number,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16),
+                                    decoration: InputDecoration(
+                                      enabledBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.purple)),
+                                    ),
+                                    cursorColor: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            //  submit button
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 30),
                             ),
@@ -663,12 +414,276 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 child: const Text('Submit'),
                               ),
                             )
+                          ],
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height - 150,
+                      child: SingleChildScrollView(
+                        child: Column(children: [
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Brand Name",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                child: const TextField(
+                                  // controller: _passwordOfAdmin,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16),
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Color",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                child: const TextField(
+                                  // controller: _passwordOfAdmin,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16),
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Description",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                child: const TextField(
+                                  // controller: _passwordOfAdmin,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16),
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Unites avialbel",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                child: const TextField(
+                                  // controller: _passwordOfAdmin,
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16),
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 100,
+                                child: Text(
+                                  "Price",
+                                  style: TextStyle(
+                                    color: Colors.purple,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                child: const TextField(
+                                  // controller: _passwordOfAdmin,
+                                  keyboardType: TextInputType.number,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 16),
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.purple)),
+                                  ),
+                                  cursorColor: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(children: [
+                            const SizedBox(
+                              width: 100,
+                              child: Text(
+                                "Condition",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                ),
+                              ),
+                            ),
+                            Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: DropdownButton<String>(
+                                  value: statusOfVehicle,
+                                  elevation: 10,
+                                  isExpanded: true,
+                                  iconEnabledColor:
+                                      Color.fromARGB(114, 104, 58, 183),
+                                  hint: Text('Condition'),
+                                  items: ["NEW", "USED", "SLIGHTLY USED"]
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      statusOfVehicle = newValue!;
+                                    });
+                                  },
+                                ))
                           ]),
-                    ),
-                  )),
-      ]),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 15),
+                          ),
+                          Row(children: [
+                            const SizedBox(
+                              width: 100,
+                              child: Text(
+                                "Condition",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                ),
+                              ),
+                            ),
+                            Container(
+                                width: MediaQuery.of(context).size.width - 200,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: DropdownButton<String>(
+                                  value: plateNumberLabeledCity,
+                                  elevation: 10,
+                                  isExpanded: true,
+                                  iconEnabledColor:
+                                      Color.fromARGB(114, 104, 58, 183),
+                                  hint: const Text('Plate Number City'),
+                                  items: [
+                                    "Amhara",
+                                    "Addis Ababa",
+                                    "Eritrea",
+                                    "Oromia",
+                                    "Harar",
+                                    "Tigray",
+                                    "Somali",
+                                    "Benishangul",
+                                    "Gambela"
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    // map the list of the country to thier abbr for storing
+                                    setState(() {
+                                      plateNumberLabeledCity = newValue!;
+                                    });
+                                  },
+                                ))
+                          ]),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 30),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width - 200,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text('Submit'),
+                            ),
+                          )
+                        ]),
+                      ),
+                    )),
+        ]),
+      ),
     );
   }
 }
-
-
