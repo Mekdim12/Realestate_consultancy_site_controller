@@ -393,21 +393,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
                       ),
                     ),
                   )
-                : Container(
+                : 
+                Container(
                     height: MediaQuery.of(context).size.height - 250,
                     child: SingleChildScrollView(
                       child: Column(
-
-                          // name_of_the_car
-                          // color
-                          // plate_number_city
-                          // description
-                          // units_available
-                          // price
-
-                          // used_or_new
-                          // status
-
                           children: [
                             Row(
                               children: [
@@ -682,19 +672,3 @@ class _PropertiesPageState extends State<PropertiesPage> {
 }
 
 
-/*
-
-<select name="city_name2" class="form-control" id="">
-                                        <option value="AA" selected="">Addis Ababa</option>
-                                        <option value="AM">Amhara</option>
-                                        <option value="ER">Eritrea</option>
-                                        <option value="OR">Oromia</option>
-                                        <option value="HA">Harar</option>
-                                        <option value="TI">Tigray</option>
-                                        <option value="SO">Somali</option>
-                                        <option value="BE">Benishangul-Gumuz</option>
-                                        <option value="GA">Gambela</option>
-                                        <option value="">Any</option>
-                                    </select>
-
- */
