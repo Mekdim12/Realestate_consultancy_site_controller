@@ -157,22 +157,22 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
                         allowMultiple: false,
                         dialogTitle: "Select Brocuhers Image",
                       );
-                      if (result != null) {
-                        final path = result.files.single.path!;
-                        final fileObject = File(path);
-                        _imageFile = fileObject;
-                      }
-                    },
-                    icon: const Icon(Icons.upload_file),
-                    label: const Text("Upload"),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        if (result != null) {
+                          final path = result.files.single.path!;
+                          final fileObject = File(path);
+                          _imageFile = fileObject;
+                        }
+                      },
+                      icon: const Icon(Icons.upload_file),
+                      label: const Text("Upload"),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
 
               Align(
                 alignment: Alignment.bottomCenter,
