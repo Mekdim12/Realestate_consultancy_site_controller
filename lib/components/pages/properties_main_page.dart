@@ -36,6 +36,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
             bool is_available = listOfPropertiesItems.length > 0;
             return Scaffold(
               floatingActionButton: FloatingActionButton(
+                heroTag: "btn1", // unique tag
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -72,9 +73,8 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                     (BuildContext context, int subIndex) {
                                       var subItem = currentItem[subIndex];
                                       Widget currentTile;
-                                      
+
                                       if (subItem is PropertyRealstateData) {
-                                       
                                         // Handle PropertyRealstateData
                                         currentTile = Container(
                                           margin: EdgeInsets.only(bottom: 10),
@@ -89,7 +89,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                             iconColor: Colors.purple,
                                             selectedColor: Colors.deepPurple,
                                             enableFeedback: true,
-                                            hoverColor: Color.fromARGB(
+                                            hoverColor:const Color.fromARGB(
                                                 89, 104, 58, 183),
                                             contentPadding:
                                                 const EdgeInsets.all(5),
@@ -133,14 +133,14 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                         currentTile = ListTile();
                                       }
 
-
                                       return InkWell(
                                         onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PropertiesDetailPage(subItem)),
+                                                    PropertiesDetailPage(
+                                                        subItem)),
                                           );
                                         },
                                         child: currentTile,
