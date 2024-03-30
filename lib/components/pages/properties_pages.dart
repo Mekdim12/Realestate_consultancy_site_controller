@@ -26,6 +26,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
     "Yeka"
   ];
 
+  TextEditingController _priceVehicle = TextEditingController();
+  TextEditingController _brandName = TextEditingController();
+  TextEditingController _colorVehicle = TextEditingController();
+  TextEditingController _descriptionVehicle = TextEditingController();
+  TextEditingController _unitsAvailabel = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -436,7 +441,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
                                 child: const TextField(
-                                  // controller: _passwordOfAdmin,
+                                  controller: _brandName,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
@@ -468,7 +473,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
                                 child: const TextField(
-                                  // controller: _passwordOfAdmin,
+                                  controller: _colorVehicle,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
@@ -500,7 +505,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
                                 child: const TextField(
-                                  // controller: _passwordOfAdmin,
+                                  controller: _descriptionVehicle,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
@@ -532,7 +537,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
                                 child: const TextField(
-                                  // controller: _passwordOfAdmin,
+                                  controller: _unitsAvailabel,
                                   keyboardType: TextInputType.number,
                                   style: TextStyle(
                                       color: Colors.black,
@@ -565,7 +570,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
                                 child: const TextField(
-                                  // controller: _passwordOfAdmin,
+                                  controller: _priceVehicle,
                                   keyboardType: TextInputType.number,
                                   style: TextStyle(
                                       color: Colors.black,
