@@ -38,10 +38,11 @@ class ApiDataUploaderAndUpdater {
     });
 
     final response = await dio.post(url.toString(), data: formData);
+
     if (response.statusCode == 200) {
-      print('Data added successfully');
+      return response.data;
     } else {
-      print('Failed to add data');
+      return false;
     }
   }
 }
