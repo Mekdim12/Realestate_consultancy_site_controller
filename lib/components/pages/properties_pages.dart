@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+import '../../services/service_api_data_add_and_updater.dart';
 
 class PropertiesPage extends StatefulWidget {
   const PropertiesPage({super.key});
@@ -12,6 +15,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
   String statusOfVehicle = "NEW";
   String CurrentSelectedChoice = '1';
   String selectedSubCity = 'Bole';
+  List<File> files = [];
+  ApiDataUploaderAndUpdater apiDataUploaderAndUpdater = ApiDataUploaderAndUpdater();
+
   String plateNumberLabeledCity = "Addis Ababa";
   List<String> listOfSubCity = [
     "Akaky Kaliti",
@@ -26,11 +32,12 @@ class _PropertiesPageState extends State<PropertiesPage> {
     "Yeka"
   ];
 
-  TextEditingController _priceVehicle = TextEditingController();
-  TextEditingController _brandName = TextEditingController();
-  TextEditingController _colorVehicle = TextEditingController();
-  TextEditingController _descriptionVehicle = TextEditingController();
-  TextEditingController _unitsAvailabel = TextEditingController();
+  final _priceVehicle = TextEditingController();
+  final _brandName = TextEditingController();
+  final _colorVehicle = TextEditingController();
+  final _descriptionVehicle = TextEditingController();
+  final _unitsAvailabel = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -440,13 +447,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
+                                child:  TextField(
                                   controller: _brandName,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.purple)),
@@ -472,13 +479,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
+                                child: TextField(
                                   controller: _colorVehicle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.purple)),
@@ -504,13 +511,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
+                                child:  TextField(
                                   controller: _descriptionVehicle,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.purple)),
@@ -536,14 +543,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
+                                child:  TextField(
                                   controller: _unitsAvailabel,
                                   keyboardType: TextInputType.number,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.purple)),
@@ -569,14 +576,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child: const TextField(
+                                child:  TextField(
                                   controller: _priceVehicle,
                                   keyboardType: TextInputType.number,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16),
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.purple)),
@@ -677,10 +684,76 @@ class _PropertiesPageState extends State<PropertiesPage> {
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 30),
                           ),
+
+                          //  image picker
+                          ElevatedButton(
+                            onPressed: () async {
+                              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                allowMultiple: true,
+                                type: FileType.custom,
+                                allowedExtensions: ['jpg', 'png', 'jpeg'],
+                              );
+
+                              if (result != null) {
+                                files = result.paths.map((path) => File(path!)).toList();
+                                setState(() {
+                                  files = files;
+                                });
+                                // Now you can use your list of files
+                              }
+                            },
+                            child: const Text('Pick images'),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 30),
+                          ),
+
+                          (files.isNotEmpty)? 
+                           // Only show the grid view if there are images
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            height: 200, // Set a specific height for the grid view
+                            child: GridView.builder(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, // Adjust number based on your needs
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                              ),
+                              itemCount: files.length,
+                              itemBuilder: (context, index) {
+                                return Image.file(files[index]);
+                              },
+                            ),
+                          ):
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 30),
+                            child: const Text('No images selected'),
+                          ),
+                        
                           Container(
                             width: MediaQuery.of(context).size.width - 200,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                if(files.length == 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Please select at least 3 images images for the properties'),
+                                    ),
+                                  );
+                                }
+                                apiDataUploaderAndUpdater.addPropertyVehiclesData(
+                                  _brandName.text,
+                                  _colorVehicle.text,
+                                  plateNumberLabeledCity,
+                                  _descriptionVehicle.text,
+                                  _unitsAvailabel.text,
+                                  _priceVehicle.text,
+                                  statusOfVehicle,
+                                  "ACTIVE",
+                                  files
+                                );
+                                
+                              },
                               child: const Text('Submit'),
                             ),
                           )
