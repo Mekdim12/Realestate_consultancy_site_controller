@@ -741,7 +741,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                     ),
                                   );
                                 }
-                                apiDataUploaderAndUpdater.addPropertyVehiclesData(
+                                final response = apiDataUploaderAndUpdater.addPropertyVehiclesData(
                                   _brandName.text,
                                   _colorVehicle.text,
                                   plateNumberLabeledCity,
@@ -752,7 +752,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   "ACTIVE",
                                   files
                                 );
-                                
+                              
                               },
                               child: const Text('Submit'),
                             ),
