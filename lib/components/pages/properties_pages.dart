@@ -128,7 +128,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
-                                    // controller: _passwordOfAdmin,
+                                    controller: _realestateCity,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
@@ -201,7 +201,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
-                                    // controller: _passwordOfAdmin,
+                                    controller: _realestateDescription,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
@@ -235,7 +235,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
                                     keyboardType: TextInputType.number,
-                                    // controller: _passwordOfAdmin,
+                                    controller: _realestateUnitsAvailabell,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
@@ -268,7 +268,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
+                                    controller: _realestatestName,
                                     style: TextStyle(
+                                      
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
@@ -300,6 +302,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
+                                    controller: _realestateBuildingNumber,
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -333,6 +336,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   width:
                                       MediaQuery.of(context).size.width - 200,
                                   child: const TextField(
+                                    controller: _realestatePrice,
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -365,7 +369,8 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
+                                    controller: _realestateNumberOfBedRooms,
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -398,7 +403,8 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
+                                    controller: _realestaterealEstateName,
                                     keyboardType: TextInputType.number,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -414,7 +420,6 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 ),
                               ],
                             ),
-
                             //  submit button
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 30),
