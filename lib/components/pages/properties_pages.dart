@@ -38,6 +38,15 @@ class _PropertiesPageState extends State<PropertiesPage> {
   final _descriptionVehicle = TextEditingController();
   final _unitsAvailabel = TextEditingController();
   
+  final _realestateCity = TextEditingController();
+  final _realestateDescription = TextEditingController();
+  final _realestateUnitsAvailabell = TextEditingController();
+  final _realestatestName = TextEditingController();
+  final _realestateBuildingNumber = TextEditingController();
+  final _realestatePrice = TextEditingController();
+  final _realestateNumberOfBedRooms = TextEditingController();
+  final _realestaterealEstateName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,13 +136,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
                                     controller: _realestateCity,
-                                    style: TextStyle(
+                                    style:const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -200,13 +209,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
                                     controller: _realestateDescription,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration:const  InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -233,14 +242,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child: TextField(
                                     keyboardType: TextInputType.number,
                                     controller: _realestateUnitsAvailabell,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -267,14 +276,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
                                     controller: _realestatestName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -301,14 +310,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
                                     controller: _realestateBuildingNumber,
                                     keyboardType: TextInputType.number,
-                                    style: TextStyle(
+                                    style:const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -335,14 +344,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child: const TextField(
+                                  child:  TextField(
                                     controller: _realestatePrice,
                                     keyboardType: TextInputType.number,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration:const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -372,11 +381,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   child:  TextField(
                                     controller: _realestateNumberOfBedRooms,
                                     keyboardType: TextInputType.number,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -406,11 +415,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                   child:  TextField(
                                     controller: _realestaterealEstateName,
                                     keyboardType: TextInputType.number,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -424,13 +433,78 @@ class _PropertiesPageState extends State<PropertiesPage> {
                             Container(
                               margin: const EdgeInsets.symmetric(vertical: 30),
                             ),
-                            Container(
-                              width: MediaQuery.of(context).size.width - 200,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('Submit'),
+                            //  image picker
+                          ElevatedButton(
+                            onPressed: () async {
+                              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                allowMultiple: true,
+                                type: FileType.custom,
+                                allowedExtensions: ['jpg', 'png', 'jpeg'],
+                              );
+
+                              if (result != null) {
+                                files = result.paths.map((path) => File(path!)).toList();
+                                setState(() {
+                                  files = files;
+                                });
+                                // Now you can use your list of files
+                              }
+                            },
+                            child: const Text('Pick images'),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 30),
+                          ),
+
+                          (files.isNotEmpty)? 
+                           // Only show the grid view if there are images
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            height: 200, // Set a specific height for the grid view
+                            child: GridView.builder(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, // Adjust number based on your needs
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
                               ),
-                            )
+                              itemCount: files.length,
+                              itemBuilder: (context, index) {
+                                return Image.file(files[index]);
+                              },
+                            ),
+                          ):
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 30),
+                            child: const Text('No images selected'),
+                          ),
+                        
+                          Container(
+                            width: MediaQuery.of(context).size.width - 200,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if(files.length == 0) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Please select at least 3 images images for the properties'),
+                                    ),
+                                  );
+                                }
+                                // final response = apiDataUploaderAndUpdater.addPropertyVehiclesData(
+                                //   _brandName.text,
+                                //   _colorVehicle.text,
+                                //   plateNumberLabeledCity,
+                                //   _descriptionVehicle.text,
+                                //   _unitsAvailabel.text,
+                                //   _priceVehicle.text,
+                                //   statusOfVehicle,
+                                //   "ACTIVE",
+                                //   files
+                                // );
+                              
+                              },
+                              child: const Text('Submit'),
+                            ),
+                          )
                           ],
                         ),
                       ),
