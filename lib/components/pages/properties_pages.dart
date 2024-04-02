@@ -16,7 +16,8 @@ class _PropertiesPageState extends State<PropertiesPage> {
   String CurrentSelectedChoice = '1';
   String selectedSubCity = 'Bole';
   List<File> files = [];
-  ApiDataUploaderAndUpdater apiDataUploaderAndUpdater = ApiDataUploaderAndUpdater();
+  ApiDataUploaderAndUpdater apiDataUploaderAndUpdater =
+      ApiDataUploaderAndUpdater();
 
   String plateNumberLabeledCity = "Addis Ababa";
   List<String> listOfSubCity = [
@@ -37,7 +38,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
   final _colorVehicle = TextEditingController();
   final _descriptionVehicle = TextEditingController();
   final _unitsAvailabel = TextEditingController();
-  
+
   final _realestateCity = TextEditingController();
   final _realestateDescription = TextEditingController();
   final _realestateUnitsAvailabell = TextEditingController();
@@ -136,9 +137,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestateCity,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
@@ -209,13 +210,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestateDescription,
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration:const  InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -276,10 +277,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestatestName,
                                     style: const TextStyle(
-                                      
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
@@ -310,10 +310,10 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestateBuildingNumber,
                                     keyboardType: TextInputType.number,
-                                    style:const TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
@@ -344,14 +344,14 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestatePrice,
                                     keyboardType: TextInputType.number,
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 16),
-                                    decoration:const InputDecoration(
+                                    decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.purple)),
@@ -378,7 +378,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestateNumberOfBedRooms,
                                     keyboardType: TextInputType.number,
                                     style: const TextStyle(
@@ -412,7 +412,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width - 200,
-                                  child:  TextField(
+                                  child: TextField(
                                     controller: _realestaterealEstateName,
                                     keyboardType: TextInputType.number,
                                     style: const TextStyle(
@@ -434,77 +434,92 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               margin: const EdgeInsets.symmetric(vertical: 30),
                             ),
                             //  image picker
-                          ElevatedButton(
-                            onPressed: () async {
-                              FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                allowMultiple: true,
-                                type: FileType.custom,
-                                allowedExtensions: ['jpg', 'png', 'jpeg'],
-                              );
+                            ElevatedButton(
+                              onPressed: () async {
+                                FilePickerResult? result =
+                                    await FilePicker.platform.pickFiles(
+                                  allowMultiple: true,
+                                  type: FileType.custom,
+                                  allowedExtensions: ['jpg', 'png', 'jpeg'],
+                                );
 
-                              if (result != null) {
-                                files = result.paths.map((path) => File(path!)).toList();
-                                setState(() {
-                                  files = files;
-                                });
-                                // Now you can use your list of files
-                              }
-                            },
-                            child: const Text('Pick images'),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 30),
-                          ),
-
-                          (files.isNotEmpty)? 
-                           // Only show the grid view if there are images
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            height: 200, // Set a specific height for the grid view
-                            child: GridView.builder(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, // Adjust number based on your needs
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                              ),
-                              itemCount: files.length,
-                              itemBuilder: (context, index) {
-                                return Image.file(files[index]);
-                              },
-                            ),
-                          ):
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 30),
-                            child: const Text('No images selected'),
-                          ),
-                        
-                          Container(
-                            width: MediaQuery.of(context).size.width - 200,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if(files.length == 0) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Please select at least 3 images images for the properties'),
-                                    ),
-                                  );
+                                if (result != null) {
+                                  files = result.paths
+                                      .map((path) => File(path!))
+                                      .toList();
+                                  setState(() {
+                                    files = files;
+                                  });
+                                  // Now you can use your list of files
                                 }
-                                // final response = apiDataUploaderAndUpdater.addPropertyVehiclesData(
-                                //   _brandName.text,
-                                //   _colorVehicle.text,
-                                //   plateNumberLabeledCity,
-                                //   _descriptionVehicle.text,
-                                //   _unitsAvailabel.text,
-                                //   _priceVehicle.text,
-                                //   statusOfVehicle,
-                                //   "ACTIVE",
-                                //   files
-                                // );
-                              
                               },
-                              child: const Text('Submit'),
+                              child: const Text('Pick images'),
                             ),
-                          )
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 30),
+                            ),
+
+                            (files.isNotEmpty)
+                                ?
+                                // Only show the grid view if there are images
+                                Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    height:
+                                        200, // Set a specific height for the grid view
+                                    child: GridView.builder(
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount:
+                                            3, // Adjust number based on your needs
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                      ),
+                                      itemCount: files.length,
+                                      itemBuilder: (context, index) {
+                                        return Image.file(files[index]);
+                                      },
+                                    ),
+                                  )
+                                : Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 30),
+                                    child: const Text('No images selected'),
+                                  ),
+
+                            Container(
+                              width: MediaQuery.of(context).size.width - 200,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  if (files.length == 0) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Please select at least 3 images images for the properties'),
+                                      ),
+                                    );
+                                  }
+                               
+
+                                  final response = apiDataUploaderAndUpdater
+                                      .addRealestatePropertyData(
+                                          _realestateCity.text,
+                                          selectedSubCity,
+                                          _realestateDescription.text,
+                                          _realestateUnitsAvailabell.text,
+                                          _realestatestName.text,
+                                          _realestateBuildingNumber.text,
+                                          _realestatePrice.text,
+                                          _realestateNumberOfBedRooms.text,
+                                          'ACTIVE',
+                                          _realestaterealEstateName.text,
+                                          files);
+
+                          
+                                },
+                                child: const Text('Submit'),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -526,7 +541,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child:  TextField(
+                                child: TextField(
                                   controller: _brandName,
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -590,7 +605,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child:  TextField(
+                                child: TextField(
                                   controller: _descriptionVehicle,
                                   style: const TextStyle(
                                       color: Colors.black,
@@ -622,7 +637,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child:  TextField(
+                                child: TextField(
                                   controller: _unitsAvailabel,
                                   keyboardType: TextInputType.number,
                                   style: const TextStyle(
@@ -655,7 +670,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width - 200,
-                                child:  TextField(
+                                child: TextField(
                                   controller: _priceVehicle,
                                   keyboardType: TextInputType.number,
                                   style: const TextStyle(
@@ -767,14 +782,17 @@ class _PropertiesPageState extends State<PropertiesPage> {
                           //  image picker
                           ElevatedButton(
                             onPressed: () async {
-                              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                              FilePickerResult? result =
+                                  await FilePicker.platform.pickFiles(
                                 allowMultiple: true,
                                 type: FileType.custom,
                                 allowedExtensions: ['jpg', 'png', 'jpeg'],
                               );
 
                               if (result != null) {
-                                files = result.paths.map((path) => File(path!)).toList();
+                                files = result.paths
+                                    .map((path) => File(path!))
+                                    .toList();
                                 setState(() {
                                   files = files;
                                 });
@@ -787,51 +805,57 @@ class _PropertiesPageState extends State<PropertiesPage> {
                             margin: const EdgeInsets.symmetric(vertical: 30),
                           ),
 
-                          (files.isNotEmpty)? 
-                           // Only show the grid view if there are images
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            height: 200, // Set a specific height for the grid view
-                            child: GridView.builder(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, // Adjust number based on your needs
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 10,
-                              ),
-                              itemCount: files.length,
-                              itemBuilder: (context, index) {
-                                return Image.file(files[index]);
-                              },
-                            ),
-                          ):
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 30),
-                            child: const Text('No images selected'),
-                          ),
-                        
+                          (files.isNotEmpty)
+                              ?
+                              // Only show the grid view if there are images
+                              Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  height:
+                                      200, // Set a specific height for the grid view
+                                  child: GridView.builder(
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount:
+                                          3, // Adjust number based on your needs
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10,
+                                    ),
+                                    itemCount: files.length,
+                                    itemBuilder: (context, index) {
+                                      return Image.file(files[index]);
+                                    },
+                                  ),
+                                )
+                              : Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 30),
+                                  child: const Text('No images selected'),
+                                ),
+
                           Container(
                             width: MediaQuery.of(context).size.width - 200,
                             child: ElevatedButton(
                               onPressed: () {
-                                if(files.length == 0) {
+                                if (files.length == 0) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text('Please select at least 3 images images for the properties'),
+                                      content: Text(
+                                          'Please select at least 3 images images for the properties'),
                                     ),
                                   );
                                 }
-                                final response = apiDataUploaderAndUpdater.addPropertyVehiclesData(
-                                  _brandName.text,
-                                  _colorVehicle.text,
-                                  plateNumberLabeledCity,
-                                  _descriptionVehicle.text,
-                                  _unitsAvailabel.text,
-                                  _priceVehicle.text,
-                                  statusOfVehicle,
-                                  "ACTIVE",
-                                  files
-                                );
-                              
+                                final response = apiDataUploaderAndUpdater
+                                    .addPropertyVehiclesData(
+                                        _brandName.text,
+                                        _colorVehicle.text,
+                                        plateNumberLabeledCity,
+                                        _descriptionVehicle.text,
+                                        _unitsAvailabel.text,
+                                        _priceVehicle.text,
+                                        statusOfVehicle,
+                                        "ACTIVE",
+                                        files);
                               },
                               child: const Text('Submit'),
                             ),
