@@ -59,7 +59,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                       Container(
                         margin: const EdgeInsets.only(
                             bottom: 10, left: 10, right: 10),
-                        height: screenHeight - 400,
+                        height: screenHeight - 210,
                         child: ListView.builder(
                           itemCount: listOfPropertiesItems.length,
                           itemBuilder: (context, index) {
