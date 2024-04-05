@@ -19,6 +19,7 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   File? _imageFile;
   String statusOfVehicle = "NEW";
   String selectedSubCity = 'Bole';
+  bool onHoveraddMoreBtn = false;
   TextEditingController _descriptionController = TextEditingController();
   String plateNumberLabeledCity = "Addis Ababa";
   List<String> listOfSubCity = [
@@ -126,6 +127,11 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                             final path = result.files.single.path!;
                             final fileObject = File(path);
                             _imageFile = fileObject;
+                            print("-------------");
+                            listOfImages.add(_imageFile);
+                            setState(() {
+                              listOfImages;
+                            });
                           }
                         },
                         icon:
@@ -455,21 +461,19 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
-                      onPressed: () {
-                        print("Pressed SItem ${selectedImageIndex}");
+
+                      onHover: (is_hovering) {
+                    
+                        setState(() {
+                          onHoveraddMoreBtn = is_hovering;
+                        });
                       },
-                      icon:
-                          const Icon(Icons.delete_forever, color: Colors.white),
-                      label: const Text("Delete"),
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromARGB(113, 155, 39, 176)),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                    ),
-                    ElevatedButton.icon(
+                      onFocusChange: (evt) {
+
+                        setState(() {
+                          onHoveraddMoreBtn = false;
+                        });
+                      },
                       onPressed: () async {
                         //  filepciker
                         final result = await FilePicker.platform.pickFiles(
@@ -481,14 +485,23 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                           final path = result.files.single.path!;
                           final fileObject = File(path);
                           _imageFile = fileObject;
+                          listOfImages.add(_imageFile?.absolute.path);
+                            setState(() {
+                              listOfImages;
+                            });
                         }
                       },
                       icon: const Icon(Icons.upload_file, color: Colors.white),
                       label: const Text("Upload"),
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromARGB(113, 155, 39, 176)),
-                      ),
+                      style: onHoveraddMoreBtn
+                          ? const ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.green),
+                            )
+                          : const ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(113, 155, 39, 176)),
+                            ),
                     ),
                   ],
                 ),
@@ -774,7 +787,7 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                   ),
                 ],
               ),
-               Container(
+              Container(
                 margin: const EdgeInsets.symmetric(vertical: 15),
               ),
               Center(
