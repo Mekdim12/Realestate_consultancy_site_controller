@@ -50,7 +50,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                   ? Column(children: [
                       Container(
                         margin: EdgeInsets.only(top: 5, bottom: 20),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           "🏡/🚗",
                           style: TextStyle(fontSize: 30),
@@ -79,7 +79,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                         currentTile = Container(
                                           margin: EdgeInsets.only(bottom: 10),
                                           decoration: BoxDecoration(
-                                            border: Border.all(
+                                            border:  Border.all(
                                                 color: Color.fromARGB(37, 0, 0,
                                                     0)), // Change this to your preferred border color
                                             borderRadius: BorderRadius.circular(
