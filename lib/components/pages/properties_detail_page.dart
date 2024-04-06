@@ -5,23 +5,16 @@ import 'package:file_picker/file_picker.dart';
 import '../../models/properties.dart';
 
 class PropertiesDetailPage extends StatefulWidget {
-  final propertyObject;
-
   const PropertiesDetailPage(this.propertyObject, {super.key});
+
+  final propertyObject;
 
   @override
   State<PropertiesDetailPage> createState() => _PropertiesDetailPageState();
 }
 
 class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
-  int selectedImageIndex = 0;
   List listOfImages = [];
-  File? _imageFile;
-  String statusOfVehicle = "NEW";
-  String selectedSubCity = 'Bole';
-  bool onHoveraddMoreBtn = false;
-  TextEditingController _descriptionController = TextEditingController();
-  String plateNumberLabeledCity = "Addis Ababa";
   List<String> listOfSubCity = [
     "Akaky Kaliti",
     "Arada",
@@ -34,6 +27,17 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
     "Nifas Silk-Lafto",
     "Yeka"
   ];
+
+  bool onHoveraddMoreBtn = false;
+  String plateNumberLabeledCity = "Addis Ababa";
+  int selectedImageIndex = 0;
+  String selectedSubCity = 'Bole';
+  String statusOfVehicle = "NEW";
+
+  TextEditingController _descriptionController = TextEditingController();
+  File? _imageFile;
+  List? newUplodedImages;
+
   Widget viewBuilder(dynamic propertyObject) {
     final Widget returnWidget;
 
@@ -101,21 +105,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton.icon(
-                        onPressed: () {
-                          print("Pressed SItem ${selectedImageIndex}");
-                        },
-                        icon: const Icon(Icons.delete_forever,
-                            color: Colors.white),
-                        label: const Text("Delete"),
-                        style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(113, 155, 39, 176)),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                      ElevatedButton.icon(
                         onPressed: () async {
                           //  filepciker
                           final result = await FilePicker.platform.pickFiles(
@@ -126,17 +115,16 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                           if (result != null) {
                             final path = result.files.single.path!;
                             final fileObject = File(path);
-                            _imageFile = fileObject;
-                            print("-------------");
-                            listOfImages.add(_imageFile);
+                            listOfImages.add(fileObject);
+                            newUplodedImages?.add(path);
+
                             setState(() {
                               listOfImages;
                             });
                           }
                         },
-                        icon:
-                            const Icon(Icons.upload_file, color: Colors.white),
-                        label: const Text("Upload"),
+                        icon: const Icon(Icons.add, color: Colors.white),
+                        label: const Text("Add Picture"),
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               Color.fromARGB(113, 155, 39, 176)),
@@ -430,7 +418,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
                       onPageChanged: (index, reason) {
-                        //   delete the image by sending delete the request here have it in state first
                         setState(() {
                           selectedImageIndex = index;
                         });
@@ -441,14 +428,22 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                   itemCount: listOfImages.length,
                   itemBuilder:
                       (BuildContext context, int itemIndex, int pageViewIndex) {
+                    var imageProvider;
+                    var item = (listOfImages as List<dynamic>)[itemIndex];
+                    if (item is File) {
+                      imageProvider = FileImage(item);
+                    } else if (item is String) {
+                      imageProvider = NetworkImage(item);
+                    }
                     return Container(
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: NetworkImage(listOfImages[itemIndex]),
-                            fit: BoxFit.fitWidth),
+                          image: imageProvider,
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     );
                   },
@@ -461,15 +456,12 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
-
                       onHover: (is_hovering) {
-                    
                         setState(() {
                           onHoveraddMoreBtn = is_hovering;
                         });
                       },
                       onFocusChange: (evt) {
-
                         setState(() {
                           onHoveraddMoreBtn = false;
                         });
@@ -484,15 +476,16 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                         if (result != null) {
                           final path = result.files.single.path!;
                           final fileObject = File(path);
-                          _imageFile = fileObject;
-                          listOfImages.add(_imageFile?.absolute.path);
-                            setState(() {
-                              listOfImages;
-                            });
+                          listOfImages.add(fileObject);
+                          newUplodedImages?.add(path);
+
+                          setState(() {
+                            listOfImages;
+                          });
                         }
                       },
-                      icon: const Icon(Icons.upload_file, color: Colors.white),
-                      label: const Text("Upload"),
+                      icon: const Icon(Icons.add, color: Colors.white),
+                      label: const Text("add Picture"),
                       style: onHoveraddMoreBtn
                           ? const ButtonStyle(
                               backgroundColor:

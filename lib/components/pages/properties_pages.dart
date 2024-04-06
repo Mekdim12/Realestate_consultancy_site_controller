@@ -53,7 +53,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text("Property Detail"),
+          child: Text("Add Property"),
         ),
         actions: [
           ElevatedButton.icon(
