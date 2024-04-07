@@ -1,6 +1,7 @@
 // import json and http package
 import '../models/properties.dart';
-import 'dart:io';
+import 'package:http/http.dart' as http;
+
 import 'package:dio/dio.dart';
 
 class ApiDataUploaderAndUpdater {
@@ -127,7 +128,7 @@ class ApiDataUploaderAndUpdater {
     final response = await dio.put(url.toString(), data: formData);
 
     if (response.statusCode == 200) {
-      var resp = PropertyRealstateData.fromJson( response.data);
+      var resp = PropertyRealstateData.fromJson(response.data);
       return [true, resp];
     } else {
       return [false, response.statusCode];
@@ -173,6 +174,19 @@ class ApiDataUploaderAndUpdater {
       return [true, resp];
     } else {
       return [false, response.statusCode];
+    }
+  }
+
+  Future deleteProperty(String id, String type) async {
+    Dio dio = Dio();
+
+    Uri url = Uri.parse('http://localhost:8000/api/property/');
+    final response = await http.delete(url, body: {'id': id, 'type': type});
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

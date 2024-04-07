@@ -67,7 +67,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   final _realestaterealEstateName = TextEditingController();
 
   void updatePropertyObject(dynamic updatedObject) {
-
     setState(() {
       _propertyObject = updatedObject;
     });
@@ -148,7 +147,25 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
           ),
           actions: [
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                // delete the data
+                bool response = await apiService.deleteProperty(id, "vehicle");
+                if (response == true) {
+                  saveChanges();
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(
+                        const SnackBar(
+                            content: Text("Vehicle Information Deleted")),
+                      )
+                      .closed
+                      .then((_) {
+                    Navigator.pop(context);
+                  });
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Vehicle Information not Deleted")));
+                }
+              },
               icon: const Icon(
                 Icons.delete,
               ),
@@ -426,12 +443,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                       hint: Text('Condition'),
                       items: ["NEW", "USED", "SLIGHTLY USED"]
                           .map<DropdownMenuItem<String>>((String value) {
-                        // if (value == propertyObject.userOrNew) {
-                        //   print("------------------->" + value);
-                        //   setState(() {
-                        //     statusOfVehicle = value!;
-                        //   });
-                        // }
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -546,7 +557,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                       } else {
                         resultStatus = "In active";
                       }
-                      
 
                       List response_ = await apiService.updateVehicleProperty(
                         _brandName.text,
@@ -570,14 +580,13 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                         saveChanges();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content:
-                                    Text("Vehicle Information Updated")));
+                                content: Text("Vehicle Information Updated")));
                       } else {
                         // show snackbar
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text(
-                                    "Vehicle Information not Updated")));
+                                content:
+                                    Text("Vehicle Information not Updated")));
                       }
                     },
                     icon: const Icon(Icons.upload),
@@ -597,7 +606,20 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
           ),
           actions: [
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                // delete the data
+                bool response =
+                    await apiService.deleteProperty(id, "realstate");
+                if (response == true) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Real-estate Information Deleted")));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Real-estate Information not Deleted")));
+                }
+                // after showing snackbar back to the previous page
+                Navigator.pop(context);
+              },
               icon: const Icon(
                 Icons.delete,
               ),
