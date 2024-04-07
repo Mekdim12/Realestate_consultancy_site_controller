@@ -16,6 +16,17 @@ class PropertiesMainPage extends StatefulWidget {
 class _PropertiesMainPageState extends State<PropertiesMainPage> {
   ApiFetcherService apiService = ApiFetcherService();
   List listOfPropertiesItems = [];
+  List<dynamic> _propertyList = [];
+
+  void updatePropertyList(dynamic updatedObject) {
+    setState(() {
+      int index =
+          _propertyList.indexWhere((item) => item.id == updatedObject.id);
+      if (index != -1) {
+        _propertyList[index] = updatedObject;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +49,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
               floatingActionButton: FloatingActionButton(
                 heroTag: "btn1", // unique tag
                 onPressed: () {
+                  
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => PropertiesPage()),
@@ -79,7 +91,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                         currentTile = Container(
                                           margin: EdgeInsets.only(bottom: 10),
                                           decoration: BoxDecoration(
-                                            border:  Border.all(
+                                            border: Border.all(
                                                 color: Color.fromARGB(37, 0, 0,
                                                     0)), // Change this to your preferred border color
                                             borderRadius: BorderRadius.circular(
@@ -89,7 +101,7 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                             iconColor: Colors.purple,
                                             selectedColor: Colors.deepPurple,
                                             enableFeedback: true,
-                                            hoverColor:const Color.fromARGB(
+                                            hoverColor: const Color.fromARGB(
                                                 89, 104, 58, 183),
                                             contentPadding:
                                                 const EdgeInsets.all(5),
@@ -140,7 +152,23 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PropertiesDetailPage(
-                                                        subItem)),
+                                                      subItem,
+                                                      onUpdate:
+                                                          (updatedObject) {
+                                                        setState(() {
+                                                          int index = _propertyList
+                                                              .indexWhere((item) =>
+                                                                  item.id ==
+                                                                  updatedObject
+                                                                      .id);
+                                                          if (index != -1) {
+                                                            _propertyList[
+                                                                    index] =
+                                                                updatedObject;
+                                                          }
+                                                        });
+                                                      },
+                                                    )),
                                           );
                                         },
                                         child: currentTile,
