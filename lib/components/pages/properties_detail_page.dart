@@ -3,18 +3,29 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import '../../models/properties.dart';
+import '../../services/service_api_data_add_and_updater.dart';
+
+typedef OnUpdateCallback = Function(dynamic updatedObject);
 
 class PropertiesDetailPage extends StatefulWidget {
-  const PropertiesDetailPage(this.propertyObject, {super.key});
-
+  final OnUpdateCallback onUpdate;
   final propertyObject;
+  const PropertiesDetailPage(this.propertyObject,
+      {Key? key, required this.onUpdate})
+      : super(key: key);
 
   @override
   State<PropertiesDetailPage> createState() => _PropertiesDetailPageState();
 }
 
 class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
+  ApiDataUploaderAndUpdater apiService = ApiDataUploaderAndUpdater();
   List listOfImages = [];
+  String selectedStAtusOfSales = 'Available';
+  List<String> statusOfSale = [
+    "Sold Out",
+    "Available",
+  ];
   String statusOfVehicle = "NEW";
   List<String> listOfSubCity = [
     "Akaky Kaliti",
@@ -33,10 +44,12 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   String plateNumberLabeledCity = "Addis Ababa";
   int selectedImageIndex = 0;
   String selectedSubCity = 'Bole';
+  String id = "";
+  dynamic _propertyObject;
 
   // TextEditingController _descriptionController = TextEditingController();
   File? _imageFile;
-  List? newUplodedImages;
+  List newUplodedImages = [];
 
   final _priceVehicle = TextEditingController();
   final _brandName = TextEditingController();
@@ -53,8 +66,33 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   final _realestateNumberOfBedRooms = TextEditingController();
   final _realestaterealEstateName = TextEditingController();
 
-  Widget viewBuilder(dynamic propertyObject) {
-    final Widget returnWidget;
+  void updatePropertyObject(dynamic updatedObject) {
+
+    setState(() {
+      _propertyObject = updatedObject;
+    });
+
+    if (widget.onUpdate != null) {
+      widget.onUpdate!(updatedObject);
+    }
+  }
+
+  void saveChanges() {
+    if (widget.onUpdate != null) {
+      widget.onUpdate!(_propertyObject);
+    }
+  }
+
+  //  override the init method to set the value of the text field
+  @override
+  void initState() {
+    super.initState();
+    final propertyObject = widget.propertyObject;
+
+    setState(() {
+      propertyObject;
+      _propertyObject = propertyObject;
+    });
 
     if (propertyObject is PropertyVehiclesData) {
       _priceVehicle.text = propertyObject.price;
@@ -66,11 +104,43 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
 
       listOfImages = propertyObject.vehicleImage;
       setState(() {
+        id = propertyObject.id;
         statusOfVehicle;
         listOfImages;
-
-        propertyObject = propertyObject;
       });
+    } else if (propertyObject is PropertyRealstateData) {
+      selectedStAtusOfSales =
+          propertyObject.status.toString().toLowerCase().trim();
+      if (selectedStAtusOfSales == "active") {
+        selectedStAtusOfSales = "Available";
+      } else {
+        selectedStAtusOfSales = "Sold Out";
+      }
+
+      listOfImages = propertyObject.propertyImage;
+      _realestateCity.text = propertyObject.city;
+      _realestateDescription.text = propertyObject.description;
+      _realestateUnitsAvailabell.text = propertyObject.unitsAvailabel;
+      _realestatestName.text = propertyObject.neighborhoodOrStreetName;
+      _realestateBuildingNumber.text = propertyObject.buildingFloors;
+      _realestatePrice.text = propertyObject.pricePerSq;
+      _realestateNumberOfBedRooms.text = propertyObject.numberOfBedrooms;
+      _realestaterealEstateName.text = propertyObject.realstateCompanyName;
+      selectedSubCity = propertyObject.subCity;
+
+      setState(() {
+        id = propertyObject.id;
+        selectedStAtusOfSales;
+        selectedSubCity;
+        listOfImages;
+      });
+    }
+  }
+
+  Widget viewBuilder(dynamic propertyObject) {
+    final Widget returnWidget;
+
+    if (propertyObject is PropertyVehiclesData) {
       returnWidget = Scaffold(
         appBar: AppBar(
           title: const Center(
@@ -98,7 +168,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                 child: CarouselSlider.builder(
                   options: CarouselOptions(
                       onPageChanged: (index, reason) {
-                        //   delete the image by sending delete the request here have it in state first
                         setState(() {
                           selectedImageIndex = index;
                         });
@@ -109,14 +178,22 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                   itemCount: listOfImages.length,
                   itemBuilder:
                       (BuildContext context, int itemIndex, int pageViewIndex) {
+                    var imageProvider;
+                    var item = (listOfImages as List<dynamic>)[itemIndex];
+                    if (item is File) {
+                      imageProvider = FileImage(item);
+                    } else if (item is String) {
+                      imageProvider = NetworkImage(item);
+                    }
                     return Container(
                       width: double.infinity,
                       margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                            image: NetworkImage(listOfImages[itemIndex]),
-                            fit: BoxFit.fitWidth),
+                          image: imageProvider,
+                          fit: BoxFit.fitWidth,
+                        ),
                       ),
                     );
                   },
@@ -144,7 +221,7 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
                           final result = await FilePicker.platform.pickFiles(
                             type: FileType.image,
                             allowMultiple: false,
-                            dialogTitle: "Select Brocuhers Image",
+                            dialogTitle: "Select Properties Image",
                           );
                           if (result != null) {
                             final path = result.files.single.path!;
@@ -421,35 +498,98 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 15),
               ),
-              //  update Button
+              Row(children: [
+                const SizedBox(
+                  width: 100,
+                  child: Text(
+                    "Sales Status",
+                    style: TextStyle(
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: MediaQuery.of(context).size.width - 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: DropdownButton<String>(
+                      value: selectedStAtusOfSales,
+                      elevation: 10,
+                      isExpanded: true,
+                      iconEnabledColor: Color.fromARGB(114, 104, 58, 183),
+                      hint: Text('Sales status'),
+                      items: statusOfSale
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedStAtusOfSales = newValue!;
+                        });
+                      },
+                    ))
+              ]),
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+              ),
+
               Center(
                 child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      // update the data
+                      String resultStatus = "";
+                      if (selectedStAtusOfSales == "Available") {
+                        resultStatus = "Active";
+                      } else {
+                        resultStatus = "In active";
+                      }
+                      
+
+                      List response_ = await apiService.updateVehicleProperty(
+                        _brandName.text,
+                        _colorVehicle.text,
+                        plateNumberLabeledCity,
+                        _descriptionVehicle.text,
+                        _unitsAvailabel.text,
+                        _priceVehicle.text,
+                        statusOfVehicle,
+                        resultStatus,
+                        newUplodedImages,
+                        id,
+                      );
+
+                      if (response_[0] == true) {
+                        // show snackbar
+                        propertyObject = response_[1];
+                        setState(() {
+                          propertyObject;
+                        });
+                        saveChanges();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("Vehicle Information Updated")));
+                      } else {
+                        // show snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Vehicle Information not Updated")));
+                      }
+                    },
                     icon: const Icon(Icons.upload),
                     label: const Text("Update")),
-              )
+              ),
+
+              //  update Button
             ],
           )),
         ),
       );
     } else if (propertyObject is PropertyRealstateData) {
-      listOfImages = propertyObject.propertyImage;
-      _realestateCity.text = propertyObject.city;
-      _realestateDescription.text = propertyObject.description;
-      _realestateUnitsAvailabell.text = propertyObject.unitsAvailabel;
-      _realestatestName.text = propertyObject.neighborhoodOrStreetName;
-      _realestateBuildingNumber.text = propertyObject.buildingFloors;
-      _realestatePrice.text = propertyObject.pricePerSq;
-      _realestateNumberOfBedRooms.text = propertyObject.numberOfBedrooms;
-      _realestaterealEstateName.text = propertyObject.realstateCompanyName;
-      selectedSubCity = propertyObject.subCity;
-
-      setState(() {
-        selectedSubCity;
-        listOfImages;
-        propertyObject = propertyObject;
-      });
-
       returnWidget = Scaffold(
         appBar: AppBar(
           title: const Center(
@@ -847,9 +987,86 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 15),
               ),
+              Row(children: [
+                const SizedBox(
+                  width: 100,
+                  child: Text(
+                    "Sales Status",
+                    style: TextStyle(
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+                Container(
+                    width: MediaQuery.of(context).size.width - 200,
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: DropdownButton<String>(
+                      value: selectedStAtusOfSales,
+                      elevation: 10,
+                      isExpanded: true,
+                      iconEnabledColor: Color.fromARGB(114, 104, 58, 183),
+                      hint: Text('Sales status'),
+                      items: statusOfSale
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedStAtusOfSales = newValue!;
+                        });
+                      },
+                    ))
+              ]),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 15),
+              ),
               Center(
                 child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      // update the data
+                      String resultStatus = "";
+                      if (selectedStAtusOfSales == "Available") {
+                        resultStatus = "Active";
+                      } else {
+                        resultStatus = "In active";
+                      }
+
+                      List response_ =
+                          await apiService.updateRealestateProperty(
+                              _realestateCity.text,
+                              selectedSubCity,
+                              _realestateDescription.text,
+                              _realestateUnitsAvailabell.text,
+                              _realestatestName.text,
+                              _realestateBuildingNumber.text,
+                              _realestatePrice.text,
+                              _realestateNumberOfBedRooms.text,
+                              resultStatus,
+                              _realestaterealEstateName.text,
+                              newUplodedImages,
+                              id);
+                      if (response_[0] == true) {
+                        // show snackbar
+                        propertyObject = response_[1];
+                        setState(() {
+                          propertyObject;
+                        });
+                        saveChanges();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content:
+                                    Text("Real-estate Information Updated")));
+                      } else {
+                        // show snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Real-estate Information not Updated")));
+                      }
+                    },
                     icon: const Icon(Icons.upload),
                     label: const Text("Update")),
               )
