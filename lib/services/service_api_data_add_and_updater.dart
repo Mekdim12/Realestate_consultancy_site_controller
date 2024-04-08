@@ -189,4 +189,17 @@ class ApiDataUploaderAndUpdater {
       return false;
     }
   }
+
+  Future deleteContactInformation(String id, String type) async {
+    Dio dio = Dio();
+
+    Uri url = Uri.parse('http://localhost:8000/api/contact-information/');
+    final response = await http.delete(url, body: {'id': id, 'type': type});
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
