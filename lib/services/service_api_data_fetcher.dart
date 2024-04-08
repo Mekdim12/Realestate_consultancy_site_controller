@@ -4,8 +4,33 @@ import 'package:http/http.dart' as http;
 import '../models/brouchersAndSpecialOffer.dart';
 import 'package:flutter/material.dart';
 import '../models/properties.dart';
+import '../models/contactsMe.dart';
+import '../models/clientCallRequest.dart';
 
 class ApiFetcherService {
+  Future fetchContactInformation() async {
+    Uri url = Uri.parse('http://127.0.0.1:8000/api/contact-information/');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      try {
+        final data = json.decode(response.body);
+        
+        List contactMeInfo = data['contact_me_info'];
+        List clientContactInfo = data['client_contact_info'];
+
+        clientContactInfo = ContactMeMessage.fromJsonList(clientContactInfo);
+        contactMeInfo = CallRequestedClient.fromJsonList(contactMeInfo);
+        return [clientContactInfo, contactMeInfo];
+        
+      } catch (e) {
+        print('Error decoding JSON: $e');
+        print('Response body: ${response.body}');
+      }
+    }
+    return [];
+  }
+
   Future fetchLandingPageStatusData() async {
     Uri url = Uri.parse('http://127.0.0.1:8000/api/home');
     final response = await http.get(url);
@@ -86,8 +111,7 @@ class ApiFetcherService {
     try {
       Uri urlRealEstate =
           Uri.parse('http://127.0.0.1:8000/api/property/realestate');
-      Uri urlVehicles =
-          Uri.parse('http://127.0.0.1:8000/api/property/vehicle');
+      Uri urlVehicles = Uri.parse('http://127.0.0.1:8000/api/property/vehicle');
 
       // Perform requests concurrently
       final responses = await Future.wait([
