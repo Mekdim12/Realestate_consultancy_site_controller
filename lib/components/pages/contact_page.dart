@@ -1,10 +1,9 @@
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'call_request_detail_page.dart';
 import 'contact_me_detail_page.dart';
+import '../../services/service_api_data_fetcher.dart';
 import '../../models/contactsMe.dart';
 import '../../models/clientCallRequest.dart';
-import '../../services/service_api_data_fetcher.dart';
 
 class ContactUserPage extends StatefulWidget {
   const ContactUserPage({super.key});
@@ -20,6 +19,11 @@ class _ContactUserPageState extends State<ContactUserPage> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      LIST_OF_REQUESTED_PHONE_CALL;
+      LIST_OF_CONTACT_ME_MESSAGES;
+    });
+
     fetchData();
   }
 
@@ -32,63 +36,6 @@ class _ContactUserPageState extends State<ContactUserPage> {
       // Handle the error here
     }
   }
-  //  list mock data
-  // final LIST_OF_REQUESTED_PHONE_CALL = [
-  //   const CallRequestedClient(
-  //       status: true,
-  //       typeOfAnItem: "Real-estate",
-  //       id: "015",
-  //       clientName: "Mekdim Tamirat",
-  //       clienEmail: "mekdim@yahoo.com",
-  //       phoneNumber: "0924041650"),
-  //   const CallRequestedClient(
-  //       status: true,
-  //       typeOfAnItem: "Vehicle",
-  //       id: "555",
-  //       clientName: "Mekdim Tamirat",
-  //       clienEmail: "mekdim@yahoo.com",
-  //       phoneNumber: "0924041650"),
-  //   const CallRequestedClient(
-  //       status: true,
-  //       typeOfAnItem: "Real-estate",
-  //       id: "55",
-  //       clientName: "Mekdim Tamirat",
-  //       clienEmail: "mekdim@yahoo.com",
-  //       phoneNumber: "0924041650")
-  // ];
-
-  // final LIST_OF_CONTACT_ME_MESSAGES = [
-  //   const ContactMeMessage(
-  //       id:"1",
-  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMM",
-  //       clientEmail: "MEKDIM@GMAIL",
-  //       clientFullName: "mekdim Tamirat",
-  //       clientSubjectOfMessage: "my message"),
-  //   const ContactMeMessage(
-  //       id:"2",
-  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-  //       clientEmail: "MEKDIM@GMAIL",
-  //       clientFullName: "mekdim Tamirat",
-  //       clientSubjectOfMessage: "my message"),
-  //   const ContactMeMessage(
-  //       id:"3",
-  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-  //       clientEmail: "MEKDIM@GMAIL",
-  //       clientFullName: "mekdim Tamirat",
-  //       clientSubjectOfMessage: "my message"),
-  //   const ContactMeMessage(
-  //       id:"4",
-  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-  //       clientEmail: "MEKDIM@GMAIL",
-  //       clientFullName: "Tamirat",
-  //       clientSubjectOfMessage: "my message"),
-  //   const ContactMeMessage(
-  //       id:"5",
-  //       clienFullMessage: "LORE",
-  //       clientEmail: "MEKDIM@GMAIL",
-  //       clientFullName: "Hasset Tamirat",
-  //       clientSubjectOfMessage: "my message"),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -161,8 +108,42 @@ class _ContactUserPageState extends State<ContactUserPage> {
                             trailing: ElevatedButton.icon(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        ContactMeDetailPage(currentItem)));
+                                    builder: (context) => ContactMeDetailPage(
+                                          currentItem,
+                                          onUpdate: (updatedObject) {
+                                            if (updatedObject
+                                                is ContactMeMessage) {
+                                              setState(() {
+                                                int index =
+                                                    LIST_OF_CONTACT_ME_MESSAGES
+                                                        .indexWhere((item) =>
+                                                            item.id ==
+                                                            updatedObject.id);
+                                                if (index != -1) {
+                                                  LIST_OF_CONTACT_ME_MESSAGES
+                                                      .removeAt(index);
+                                                  setState(() {
+                                                    LIST_OF_CONTACT_ME_MESSAGES;
+                                                  });
+                                                }
+                                              });
+                                            }
+                                            // } else if (updatedObject
+                                            //     is CallRequestedClient) {
+                                            //   setState(() {
+                                            //     int index =
+                                            //         LIST_OF_REQUESTED_PHONE_CALL
+                                            //             .indexWhere((item) =>
+                                            //                 item.id ==
+                                            //                 updatedObject.id);
+                                            //     if (index != -1) {
+                                            //       LIST_OF_REQUESTED_PHONE_CALL[
+                                            //           index] = updatedObject;
+                                            //     }
+                                            //   });
+                                            // }
+                                          },
+                                        )));
                               },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),
@@ -224,7 +205,26 @@ class _ContactUserPageState extends State<ContactUserPage> {
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
-                                        CallRequestDetailPage(currentItem)));
+                                        CallRequestDetailPage(currentItem,
+                                            onUpdate: (updatedObject) {
+                                          if (updatedObject
+                                              is ContactMeMessage) {
+                                            setState(() {
+                                              int index =
+                                                  LIST_OF_REQUESTED_PHONE_CALL
+                                                      .indexWhere((item) =>
+                                                          item.id ==
+                                                          updatedObject.id);
+                                              if (index != -1) {
+                                                LIST_OF_REQUESTED_PHONE_CALL
+                                                    .removeAt(index);
+                                                setState(() {
+                                                  LIST_OF_REQUESTED_PHONE_CALL;
+                                                });
+                                              }
+                                            });
+                                          }
+                                        })));
                               },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),

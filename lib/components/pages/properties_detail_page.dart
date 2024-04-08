@@ -66,15 +66,7 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   final _realestateNumberOfBedRooms = TextEditingController();
   final _realestaterealEstateName = TextEditingController();
 
-  void updatePropertyObject(dynamic updatedObject) {
-    setState(() {
-      _propertyObject = updatedObject;
-    });
-
-    if (widget.onUpdate != null) {
-      widget.onUpdate!(updatedObject);
-    }
-  }
+ 
 
   void saveChanges() {
     if (widget.onUpdate != null) {
