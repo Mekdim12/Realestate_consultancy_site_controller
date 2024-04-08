@@ -2,10 +2,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'call_request_detail_page.dart';
 import 'contact_me_detail_page.dart';
-import  '../../models/contactsMe.dart';
+import '../../models/contactsMe.dart';
 import '../../models/clientCallRequest.dart';
 import '../../services/service_api_data_fetcher.dart';
-
 
 class ContactUserPage extends StatefulWidget {
   const ContactUserPage({super.key});
@@ -15,74 +14,84 @@ class ContactUserPage extends StatefulWidget {
 }
 
 class _ContactUserPageState extends State<ContactUserPage> {
+  ApiFetcherService apiService = ApiFetcherService();
+  List LIST_OF_REQUESTED_PHONE_CALL = [];
+  List LIST_OF_CONTACT_ME_MESSAGES = [];
   @override
-  void initState(){
-    // apiService.fetchBrouchersAndBestOfferes();
+  void initState() {
     super.initState();
-    // fetchContactMe().
+    fetchData();
+  }
 
-
+  Future<void> fetchData() async {
+    try {
+      List response = await apiService.fetchContactInformation();
+      LIST_OF_REQUESTED_PHONE_CALL = response[1];
+      LIST_OF_CONTACT_ME_MESSAGES = response[0];
+    } catch (error) {
+      // Handle the error here
+    }
   }
   //  list mock data
-  final LIST_OF_REQUESTED_PHONE_CALL = [
-    const CallRequestedClient(
-        status: true,
-        typeOfAnItem: "Real-estate",
-        id: "015",
-        clientName: "Mekdim Tamirat",
-        clienEmail: "mekdim@yahoo.com",
-        phoneNumber: "0924041650"),
-    const CallRequestedClient(
-        status: true,
-        typeOfAnItem: "Vehicle",
-        id: "555",
-        clientName: "Mekdim Tamirat",
-        clienEmail: "mekdim@yahoo.com",
-        phoneNumber: "0924041650"),
-    const CallRequestedClient(
-        status: true,
-        typeOfAnItem: "Real-estate",
-        id: "55",
-        clientName: "Mekdim Tamirat",
-        clienEmail: "mekdim@yahoo.com",
-        phoneNumber: "0924041650")
-  ];
+  // final LIST_OF_REQUESTED_PHONE_CALL = [
+  //   const CallRequestedClient(
+  //       status: true,
+  //       typeOfAnItem: "Real-estate",
+  //       id: "015",
+  //       clientName: "Mekdim Tamirat",
+  //       clienEmail: "mekdim@yahoo.com",
+  //       phoneNumber: "0924041650"),
+  //   const CallRequestedClient(
+  //       status: true,
+  //       typeOfAnItem: "Vehicle",
+  //       id: "555",
+  //       clientName: "Mekdim Tamirat",
+  //       clienEmail: "mekdim@yahoo.com",
+  //       phoneNumber: "0924041650"),
+  //   const CallRequestedClient(
+  //       status: true,
+  //       typeOfAnItem: "Real-estate",
+  //       id: "55",
+  //       clientName: "Mekdim Tamirat",
+  //       clienEmail: "mekdim@yahoo.com",
+  //       phoneNumber: "0924041650")
+  // ];
 
-  final LIST_OF_CONTACT_ME_MESSAGES = [
-    const ContactMeMessage(
-        id:"1",
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMM",
-        clientEmail: "MEKDIM@GMAIL",
-        clientFullName: "mekdim Tamirat",
-        clientSubjectOfMessage: "my message"),
-    const ContactMeMessage(
-        id:"2",
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-        clientEmail: "MEKDIM@GMAIL",
-        clientFullName: "mekdim Tamirat",
-        clientSubjectOfMessage: "my message"),
-    const ContactMeMessage(
-        id:"3",
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-        clientEmail: "MEKDIM@GMAIL",
-        clientFullName: "mekdim Tamirat",
-        clientSubjectOfMessage: "my message"),
-    const ContactMeMessage(
-        id:"4",
-        clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
-        clientEmail: "MEKDIM@GMAIL",
-        clientFullName: "Tamirat",
-        clientSubjectOfMessage: "my message"),
-    const ContactMeMessage(
-        id:"5",
-        clienFullMessage: "LORE",
-        clientEmail: "MEKDIM@GMAIL",
-        clientFullName: "Hasset Tamirat",
-        clientSubjectOfMessage: "my message"),
-  ];
+  // final LIST_OF_CONTACT_ME_MESSAGES = [
+  //   const ContactMeMessage(
+  //       id:"1",
+  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMMIPSUMMMMMMMMMMMMMMMMMMM",
+  //       clientEmail: "MEKDIM@GMAIL",
+  //       clientFullName: "mekdim Tamirat",
+  //       clientSubjectOfMessage: "my message"),
+  //   const ContactMeMessage(
+  //       id:"2",
+  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+  //       clientEmail: "MEKDIM@GMAIL",
+  //       clientFullName: "mekdim Tamirat",
+  //       clientSubjectOfMessage: "my message"),
+  //   const ContactMeMessage(
+  //       id:"3",
+  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+  //       clientEmail: "MEKDIM@GMAIL",
+  //       clientFullName: "mekdim Tamirat",
+  //       clientSubjectOfMessage: "my message"),
+  //   const ContactMeMessage(
+  //       id:"4",
+  //       clienFullMessage: "LORE IPSUMMMMMMMMMMMMMMMMMMM",
+  //       clientEmail: "MEKDIM@GMAIL",
+  //       clientFullName: "Tamirat",
+  //       clientSubjectOfMessage: "my message"),
+  //   const ContactMeMessage(
+  //       id:"5",
+  //       clienFullMessage: "LORE",
+  //       clientEmail: "MEKDIM@GMAIL",
+  //       clientFullName: "Hasset Tamirat",
+  //       clientSubjectOfMessage: "my message"),
+  // ];
+
   @override
   Widget build(BuildContext context) {
-
     final double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.zero,
@@ -148,10 +157,12 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                     "${currentItem.clientSubjectOfMessage.toString().substring(0, 50)}...")
                                 : Text(
                                     "${currentItem.clientSubjectOfMessage.toString().substring(0, currentItem.clientSubjectOfMessage.toString().length)}...",
-                                ),
+                                  ),
                             trailing: ElevatedButton.icon(
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ContactMeDetailPage(currentItem)));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ContactMeDetailPage(currentItem)));
                               },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),
@@ -185,7 +196,6 @@ class _ContactUserPageState extends State<ContactUserPage> {
                         bottom: 10, left: 10, right: 10, top: 30),
                     height: screenHeight - 400,
                     child: ListView.builder(
-
                         itemCount: LIST_OF_REQUESTED_PHONE_CALL.length,
                         itemBuilder: (context, index) {
                           var currentItem = LIST_OF_REQUESTED_PHONE_CALL[index];
@@ -211,8 +221,10 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                 : Text(
                                     "${currentItem.typeOfAnItem.toString().substring(0, currentItem.typeOfAnItem.toString().length)}..."),
                             trailing: ElevatedButton.icon(
-                              onPressed: (){
-                                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CallRequestDetailPage(currentItem)));
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CallRequestDetailPage(currentItem)));
                               },
                               icon:
                                   const Icon(Icons.arrow_circle_right_rounded),
