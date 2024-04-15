@@ -17,7 +17,7 @@ class CallRequestedClient {
     return CallRequestedClient(
       status: json['is_status_new'],
       typeOfAnItem: json['type_of_item'],
-      id: json['id_of_an_item'].toString(),
+      id: json['id'].toString(),
       clientName: json['client_full_name'],
       clienEmail: json['client_email'],
       phoneNumber: json['phone_number'],

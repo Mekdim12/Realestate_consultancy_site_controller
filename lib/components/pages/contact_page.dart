@@ -208,7 +208,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                         CallRequestDetailPage(currentItem,
                                             onUpdate: (updatedObject) {
                                           if (updatedObject
-                                              is ContactMeMessage) {
+                                              is CallRequestedClient) {
                                             setState(() {
                                               int index =
                                                   LIST_OF_REQUESTED_PHONE_CALL
