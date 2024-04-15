@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/home.dart';
 
 class LoginPageWidget extends StatefulWidget {
   const LoginPageWidget({super.key});
@@ -13,11 +14,22 @@ class LoginPageState extends State<LoginPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 150),
+      margin: const EdgeInsets.only(top: 20),
       width: double.infinity,
       height: double.infinity,
       child: Column(
         children: [
+          Container(
+              width: 80,
+              height: 80,
+              color: null,
+              margin: const EdgeInsets.only(top: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/tg_main_logo.png'),
+                ),
+              )),
           const Text(
             "LOGIN",
             textAlign: TextAlign.center,
@@ -28,7 +40,7 @@ class LoginPageState extends State<LoginPageWidget> {
                 letterSpacing: 3),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, right: 35, top: 80),
+            margin: const EdgeInsets.only(left: 25, right: 35, top: 50),
             child: TextField(
                 controller: _userNameOfAdmin,
                 style: const TextStyle(
@@ -37,7 +49,10 @@ class LoginPageState extends State<LoginPageWidget> {
                     fontSize: 16),
                 decoration: InputDecoration(
                     enabledBorder: UnderlineInputBorder(
-                        borderSide:  BorderSide(color:(userNameOrPasswordIncorrect)? Colors.red:Colors.purple)),
+                        borderSide: BorderSide(
+                            color: (userNameOrPasswordIncorrect)
+                                ? Colors.red
+                                : Colors.purple)),
                     icon: const Icon(Icons.abc),
                     iconColor: const Color.fromARGB(255, 85, 42, 92),
                     labelText: "User Name",
@@ -55,13 +70,16 @@ class LoginPageState extends State<LoginPageWidget> {
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
                   fontSize: 16),
-              decoration:  InputDecoration(
+              decoration: InputDecoration(
                   enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color:(userNameOrPasswordIncorrect)? Colors.red:Colors.purple)),
+                      borderSide: BorderSide(
+                          color: (userNameOrPasswordIncorrect)
+                              ? Colors.red
+                              : Colors.purple)),
                   icon: const Icon(Icons.password),
                   iconColor: const Color.fromARGB(255, 85, 42, 92),
                   labelText: "Password",
-                  labelStyle:const TextStyle(
+                  labelStyle: const TextStyle(
                     color: Colors.purple,
                   ),
                   hoverColor: Colors.amberAccent),
@@ -73,12 +91,20 @@ class LoginPageState extends State<LoginPageWidget> {
             margin: const EdgeInsets.only(top: 80),
             child: ElevatedButton(
               onPressed: () => {
-                if (_userNameOfAdmin.text.toString().trim().toLowerCase() == "admin" &&
-                    _passwordOfAdmin.text.toString().trim().toLowerCase() == "admin"){
-                      print("perform the authentication")
-                  }else{
-                    setState((){
-                        userNameOrPasswordIncorrect =true;
+                if (_userNameOfAdmin.text.toString().trim().toLowerCase() ==
+                        "admin" &&
+                    _passwordOfAdmin.text.toString().trim().toLowerCase() ==
+                        "admin")
+                  {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )
+                  }
+                else
+                  {
+                    setState(() {
+                      userNameOrPasswordIncorrect = true;
                     })
                   }
               },
@@ -91,7 +117,7 @@ class LoginPageState extends State<LoginPageWidget> {
                 "Login",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                    fontSize: 16,
                     color: Color.fromARGB(255, 250, 249, 251),
                     fontWeight: FontWeight.bold),
               ),

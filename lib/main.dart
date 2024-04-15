@@ -16,8 +16,8 @@ class MainAppWidget extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-       home: Scaffold(
-        body: HomePage(),
+       home: const Scaffold(
+        body: LoginPageWidget(),
        )
     );
   }
