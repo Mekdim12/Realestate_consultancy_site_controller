@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import './components/splash_screen.dart';
-import './components/login_page.dart';
 
-
-void main() {
+Future<void> main() async {
   runApp(const MainAppWidget());
 }
 
-class MainAppWidget extends StatelessWidget{
-  const MainAppWidget({super.key});
-    @override
+class MainAppWidget extends StatelessWidget {
+  const MainAppWidget({Key? key}) : super(key: key); // Correct this line
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Real State ageny Management system",
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-      ),
-       home: const Scaffold(
-        body: SplashScreenWidget(),
-       )
-    );
+    return GetMaterialApp(
+        title: "Real State agency Management system",
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+        ),
+        home: const Scaffold(
+          body: SplashScreenWidget(),
+        ));
   }
 }
