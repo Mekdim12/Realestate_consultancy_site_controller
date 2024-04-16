@@ -7,7 +7,7 @@ import 'pages/contact_page.dart';
 import 'pages/profile_page.dart';
 import 'pages/properties_main_page.dart';
 
-
+import '../dependency_injection.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,12 +18,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selected_index_page_sync_value_holder  = 2; // default value is 2 for home page
- 
+  @override
+  void initState() {
+    super.initState();
+    DependecyInjection.init();
+  }
   
   @override
   Widget build(BuildContext context) {
-    // ApiFetcherService apiFetcherService = ApiFetcherService();
-
+  
     final screen_pages = <Widget>[
         BrouchersPage(),
         PropertiesMainPage(),
@@ -82,29 +85,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-/*
-  - new brouchers or offers 
-        make sure there is onely 5 is submitted make sure there is some way to select for which part its is
-  - properties 
-        prepare form that accepts these type of properties using different page because they have different attributes and make sure there is at lease pciture uploaded on the ay 
-      - vehicles
-      - realestate
-  - contact us form 
-        list of messages from user option to delete and view is only needed
-  - list of request call 
-        list of name and number of user request call from agent and when reviewed , and option to delete that call request
- */
-
-
-/*
-
-required cards
-
-tottal number of users ineracted with the forms
-tottal number of user request call from agent
-number of unread contacts us messages
-numner of new request calls
-
- */
 
