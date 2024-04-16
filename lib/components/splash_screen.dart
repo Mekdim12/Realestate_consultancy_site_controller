@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:connectivity/connectivity.dart';
 import './login_page.dart';
+import 'package:http/http.dart' as http;
 
 class SplashScreenWidget extends StatefulWidget {
   const SplashScreenWidget({super.key});
@@ -13,7 +15,69 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
   @override
   void initState() {
     super.initState();
+    _checkInternetConnectivity();
+    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    //   if (result == ConnectivityResult.none) {
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text("No internet connection"),
+    //       ),
+    //     );
+    //   } else {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => LoginPageWidget()),
+    //     );
+    //   }
+    // });
   }
+
+  void _checkInternetConnectivity() async {
+    try {
+      final response =
+          await http.get(Uri.parse('http://127.0.0.1:8000/api/home'));
+      if (response.statusCode == 200) {
+        // Internet connection is available, navigate to the login page
+        // even the server is running and working give at lease 3 second on this page before navigating to the login page
+        await Future.delayed(const Duration(seconds: 3));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPageWidget()),
+        );
+      } else {
+        // If the server returns a 404 or other non-200 status code, show a snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("No internet connection"),
+          ),
+        );
+      }
+    } catch (e) {
+      // If the request throws an exception, show a snackbar
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: const Duration(seconds: 10),
+          content: Text("No internet connection or your server is down"),
+        ),
+      );
+    }
+  }
+
+  // void _checkInternetConnectivity() async {
+  //   var connectivityResult = await (Connectivity().checkConnectivity());
+  //   if (connectivityResult == ConnectivityResult.none) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text("No internet connection"),
+  //       ),
+  //     );
+  //   } else {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => LoginPageWidget()),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
