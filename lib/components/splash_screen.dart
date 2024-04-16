@@ -2,26 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import './login_page.dart';
 
-class SplashScreenWidget extends StatefulWidget{
+class SplashScreenWidget extends StatefulWidget {
   const SplashScreenWidget({super.key});
 
   @override
-  State<SplashScreenWidget> createState() =>MainSplashScreenState();
-  
+  State<SplashScreenWidget> createState() => MainSplashScreenState();
 }
 
-
-
 class MainSplashScreenState extends State<SplashScreenWidget> {
- 
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
-  
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenwidth = MediaQuery.of(context).size.width;
 
     return Container(
       width: double.infinity,
@@ -31,18 +28,19 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
       child: Column(
         children: [
           Container(
-            width: 250,
-            height: 250,
-            color: null,
-            margin:const EdgeInsets.only(top: 50),
-            decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/tg_main_logo.png'),
+              width: screenwidth * 0.5,
+              height: screenHeight * 0.3,
+              color: null,
+              margin: const EdgeInsets.only(top: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/tg_main_logo.png'),
                 ),
-           )    
-          ),
-          const Text("Real State Consultancy", style: TextStyle(
+              )),
+          const Text(
+            "Real State Consultancy",
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
               fontSize: 27,
@@ -59,16 +57,14 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
                 ),
               ],
             ),
-            ),
-            Container(margin: const EdgeInsets.symmetric(vertical: 80)),
-          // CircularProgressIndicator(),
-          const SpinKitRipple(
+          ),
+          Container(margin: EdgeInsets.symmetric(vertical: screenHeight * 0.1)),
+          SpinKitRipple(
             color: Colors.purple,
-            size: 100.0,
+            size: screenHeight * 0.1,
           ),
         ],
       ),
-    
     );
   }
 }
