@@ -16,20 +16,6 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
   void initState() {
     super.initState();
     _checkInternetConnectivity();
-    // Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-    //   if (result == ConnectivityResult.none) {
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text("No internet connection"),
-    //       ),
-    //     );
-    //   } else {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => LoginPageWidget()),
-    //     );
-    //   }
-    // });
   }
 
   void _checkInternetConnectivity() async {
@@ -62,22 +48,6 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
       );
     }
   }
-
-  // void _checkInternetConnectivity() async {
-  //   var connectivityResult = await (Connectivity().checkConnectivity());
-  //   if (connectivityResult == ConnectivityResult.none) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text("No internet connection"),
-  //       ),
-  //     );
-  //   } else {
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => LoginPageWidget()),
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
