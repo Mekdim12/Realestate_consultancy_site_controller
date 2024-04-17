@@ -110,3 +110,4 @@ flutter:
   assets:
     - assets/images/tg_main_logo.png
     - assets/images/not_found.png
+    - assets/gif/no_internet.gif
