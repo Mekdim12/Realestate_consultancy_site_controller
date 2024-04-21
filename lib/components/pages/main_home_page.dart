@@ -35,6 +35,7 @@ class _MainHomePageState extends State<MainHomePage> {
           String formattedTotalSales = formatter.format(int.parse(snapshot.data['total_sales'].toString()));   
           String formatterForAvgPrice = formatter.format(int.parse(snapshot.data['average_sold_price'].toString()));  
         return  Scaffold(
+
       backgroundColor: Colors.grey[50],
       body: Container(
         height: MediaQuery.of(context).size.height - 100,
@@ -66,8 +67,8 @@ class _MainHomePageState extends State<MainHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CardWidget(150, 100, "Avg Price", "\$ $formatterForAvgPrice"),
-                    CardWidget(150, 100, "Companies", snapshot.data['companies'].toString()),
+                    CardWidget(150, 115, "Avg Price", "\$ $formatterForAvgPrice"),
+                    CardWidget(150, 115, "Companies", snapshot.data['companies'].toString()),
                   ],
                 )),
             Container(
@@ -75,7 +76,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 margin: const EdgeInsets.only(top: 25),
                 child: CardWidget(
                   300,
-                  100,
+                  115,
                   "New Call Request",
                 snapshot.data['call_request'].toString(),
                 ))
