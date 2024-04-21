@@ -66,8 +66,6 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
   final _realestateNumberOfBedRooms = TextEditingController();
   final _realestaterealEstateName = TextEditingController();
 
- 
-
   void saveChanges() {
     if (widget.onUpdate != null) {
       widget.onUpdate!(_propertyObject);
@@ -601,19 +599,26 @@ class _PropertiesDetailPageState extends State<PropertiesDetailPage> {
               onPressed: () async {
                 // delete the data
                 bool response =
-                    await apiService.deleteProperty(id, "realstate");
+                    await apiService.deleteProperty(id, "realestate");
                 if (response == true) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Real-estate Information Deleted")));
+                  saveChanges();
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(
+                        const SnackBar(
+                            content: Text("Real-estate Information Deleted")),
+                      )
+                      .closed
+                      .then((_) {
+                    Navigator.pop(context);
+                  });
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text("Real-estate Information not Deleted")));
                 }
-                // after showing snackbar back to the previous page
-                Navigator.pop(context);
               },
               icon: const Icon(
                 Icons.delete,
+                color: Colors.white,
               ),
               label: Text(""),
               style: const ButtonStyle(

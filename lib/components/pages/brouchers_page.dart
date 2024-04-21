@@ -35,17 +35,18 @@ class _BrouchersPageState extends State<BrouchersPage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}'); // Show error if any
           } else {
-            listOfBroucherItems = snapshot.data;
-
             bool is_image_available = listOfBroucherItems.length > 0;
+            if (is_image_available) {
+              listOfBroucherItems = snapshot.data;
+            }
+
             return Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            BrouchersDetailPage(updateList)),
+                        builder: (context) => BrouchersDetailPage(updateList)),
                   );
                 },
                 backgroundColor: Colors.purple,
@@ -121,6 +122,9 @@ class _BrouchersPageState extends State<BrouchersPage> {
                                     setState(() {
                                       listOfBroucherItems.removeAt(index);
                                     });
+                                    listOfBroucherItems =
+                                        List<BrouchersData>.from(
+                                            listOfBroucherItems);
                                   },
                                   icon: const Icon(Icons.delete),
                                   label: const Text(''),

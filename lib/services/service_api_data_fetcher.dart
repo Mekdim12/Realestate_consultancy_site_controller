@@ -15,17 +15,16 @@ class ApiFetcherService {
     if (response.statusCode == 200) {
       try {
         final data = json.decode(response.body);
-        
+
         List contactMeInfo = data['contact_me_info'];
         List clientContactInfo = data['client_contact_info'];
 
         clientContactInfo = ContactMeMessage.fromJsonList(clientContactInfo);
         contactMeInfo = CallRequestedClient.fromJsonList(contactMeInfo);
         return [clientContactInfo, contactMeInfo];
-        
       } catch (e) {
         print('Error decoding JSON: $e');
-        print('Response body: ${response.body}');
+        print('Response body1: ${response.body}');
       }
     }
     return [];
@@ -122,6 +121,9 @@ class ApiFetcherService {
       final finalResponse = [];
 
       for (var response in responses) {
+        if (response.body.isEmpty) {
+          continue;
+        }
         if (response.statusCode == 200) {
           try {
             final responseBody = jsonDecode(response.body);
@@ -134,11 +136,11 @@ class ApiFetcherService {
             }
           } catch (e) {
             print('Error decoding JSON: $e');
-            print('Response body: ${response.body}');
+            print('Response body2: ${response.body}');
           }
         } else {
           print('Request failed with status: ${response.statusCode}');
-          print('Response body: ${response.body}');
+          print('Response body3: ${response.body}');
         }
       }
       return finalResponse;
