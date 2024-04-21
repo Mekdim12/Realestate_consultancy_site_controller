@@ -26,7 +26,7 @@ class MainSplashScreenState extends State<SplashScreenWidget> {
         // Internet connection is available, navigate to the login page
         // even the server is running and working give at lease 3 second on this page before navigating to the login page
         await Future.delayed(const Duration(seconds: 3));
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const LoginPageWidget()),
         );
