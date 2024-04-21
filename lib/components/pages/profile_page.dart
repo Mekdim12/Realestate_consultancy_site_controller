@@ -167,11 +167,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Container(
-                        width: 150,
-                        margin: const EdgeInsets.only(top: 25),
+                        width: 200,
+                        height: 40,
+                        margin: const EdgeInsets.only(top: 50),
                         child: ElevatedButton(
                             style: const ButtonStyle(
-                              alignment: Alignment.bottomCenter,
+                             
                               backgroundColor:
                                   MaterialStatePropertyAll(Colors.deepPurple),
                               elevation: MaterialStatePropertyAll(15),
@@ -182,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   _averageSoldPriceController.text,
                                   _companiesWorkingController.text);
                             },
-                            child: const Text("Update")))
+                            child: const Text("Update", style: TextStyle(color: Colors.white))),)
                   ],
                 ),
               ),
