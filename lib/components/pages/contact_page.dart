@@ -128,20 +128,7 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                                 }
                                               });
                                             }
-                                            // } else if (updatedObject
-                                            //     is CallRequestedClient) {
-                                            //   setState(() {
-                                            //     int index =
-                                            //         LIST_OF_REQUESTED_PHONE_CALL
-                                            //             .indexWhere((item) =>
-                                            //                 item.id ==
-                                            //                 updatedObject.id);
-                                            //     if (index != -1) {
-                                            //       LIST_OF_REQUESTED_PHONE_CALL[
-                                            //           index] = updatedObject;
-                                            //     }
-                                            //   });
-                                            // }
+                                        
                                           },
                                         )));
                               },
