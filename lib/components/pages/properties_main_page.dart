@@ -49,10 +49,15 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
               floatingActionButton: FloatingActionButton(
                 heroTag: "btn1", // unique tag
                 onPressed: () {
-                  
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PropertiesPage()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PropertiesPage(onUpdate: (updatedObject) {
+                              setState(() {
+                                _propertyList.add(updatedObject);
+                              });
+                            })),
                   );
                 },
                 backgroundColor: Colors.purple,

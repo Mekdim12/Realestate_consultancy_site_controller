@@ -3,8 +3,11 @@ import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import '../../services/service_api_data_add_and_updater.dart';
 
+typedef OnUpdateCallback = Function(dynamic updatedObject);
+
 class PropertiesPage extends StatefulWidget {
-  const PropertiesPage({super.key});
+  final OnUpdateCallback onUpdate;
+  const PropertiesPage({Key? key, required this.onUpdate});
 
   @override
   State<PropertiesPage> createState() => _PropertiesPageState();
@@ -48,24 +51,25 @@ class _PropertiesPageState extends State<PropertiesPage> {
   final _realestateNumberOfBedRooms = TextEditingController();
   final _realestaterealEstateName = TextEditingController();
 
+  void saveChanges() {
+    if (widget.onUpdate != null) {
+      // widget.onUpdate!(_propertyObject);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Center(
           child: Text("Add Property"),
         ),
-        actions: [
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.delete,
-            ),
-            label: Text(""),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.purple)),
-          )
-        ],
       ),
       body: Container(
         margin: EdgeInsets.only(top: 20),
@@ -499,7 +503,6 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                       ),
                                     );
                                   }
-                               
 
                                   final response = apiDataUploaderAndUpdater
                                       .addRealestatePropertyData(
@@ -515,7 +518,18 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                           _realestaterealEstateName.text,
                                           files);
 
-                          
+                                  response.then((value) {
+                                    if (value) {
+                                      saveChanges();
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Failed to save'),
+                                        ),
+                                      );
+                                    }
+                                  });
                                 },
                                 child: const Text('Submit'),
                               ),

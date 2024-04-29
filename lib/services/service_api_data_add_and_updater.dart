@@ -84,7 +84,7 @@ class ApiDataUploaderAndUpdater {
     final response = await dio.post(url.toString(), data: formData);
 
     if (response.statusCode == 200) {
-      return response.data;
+      return true;
     } else {
       return false;
     }
