@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import '../../services/service_api_data_add_and_updater.dart';
+import '../../models/properties.dart';
 
 typedef OnUpdateCallback = Function(dynamic updatedObject);
 
@@ -14,6 +15,10 @@ class PropertiesPage extends StatefulWidget {
 }
 
 class _PropertiesPageState extends State<PropertiesPage> {
+  PropertyRealstateData? _propertyObject;
+  PropertyVehiclesData? _vehicleObject;
+  dynamic _propertyObjectData;
+
   bool isPropertiesRealesate = true;
   String statusOfVehicle = "NEW";
   String CurrentSelectedChoice = '1';
@@ -52,8 +57,10 @@ class _PropertiesPageState extends State<PropertiesPage> {
   final _realestaterealEstateName = TextEditingController();
 
   void saveChanges() {
+    print("???????????????????????????");
+    print(widget.onUpdate);
     if (widget.onUpdate != null) {
-      // widget.onUpdate!(_propertyObject);
+      widget.onUpdate!(_propertyObjectData);
     }
   }
 
@@ -519,7 +526,12 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                           files);
 
                                   response.then((value) {
-                                    if (value) {
+                                    if (value[0]) {
+                                      final properttObject = value[1];
+                                      setState(() {
+                                        _propertyObject = properttObject;
+                                      });
+
                                       saveChanges();
                                     } else {
                                       ScaffoldMessenger.of(context)

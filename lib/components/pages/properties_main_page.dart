@@ -55,7 +55,8 @@ class _PropertiesMainPageState extends State<PropertiesMainPage> {
                         builder: (context) =>
                             PropertiesPage(onUpdate: (updatedObject) {
                               setState(() {
-                                _propertyList.add(updatedObject);
+                                print("---->"+updatedObject);
+                               // _propertyList.add(updatedObject);
                               });
                             })),
                   );

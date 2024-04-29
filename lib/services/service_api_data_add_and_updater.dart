@@ -84,9 +84,11 @@ class ApiDataUploaderAndUpdater {
     final response = await dio.post(url.toString(), data: formData);
 
     if (response.statusCode == 200) {
-      return true;
+      var resp = PropertyRealstateData.fromJson(response.data);
+      return [true, resp];
+
     } else {
-      return false;
+      return [false, false];
     }
   }
 
