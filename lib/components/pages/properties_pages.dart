@@ -57,10 +57,8 @@ class _PropertiesPageState extends State<PropertiesPage> {
   final _realestaterealEstateName = TextEditingController();
 
   void saveChanges() {
-    print("???????????????????????????");
-    print(widget.onUpdate);
     if (widget.onUpdate != null) {
-      widget.onUpdate!(_propertyObjectData);
+      widget.onUpdate(_propertyObjectData);
     }
   }
 
@@ -529,10 +527,21 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                     if (value[0]) {
                                       final properttObject = value[1];
                                       setState(() {
-                                        _propertyObject = properttObject;
+                                        _propertyObjectData = properttObject;
                                       });
 
                                       saveChanges();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                            const SnackBar(
+                                                duration: Duration(seconds: 2),
+                                                content: Text(
+                                                    "Property has been added successfully")),
+                                          )
+                                          .closed
+                                          .then((_) {
+                                        Navigator.pop(context);
+                                      });
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
