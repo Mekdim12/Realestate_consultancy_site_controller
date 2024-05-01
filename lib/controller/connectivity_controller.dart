@@ -23,6 +23,11 @@ class NetworkController extends GetxController {
         Get.back();
       }
     }
+  
+  }
+   void checkCurrentConnection() async {
+    var connectivityResult = await _connectivity.checkConnectivity();
+    _update_connection_status(connectivityResult);
   }
 }
 

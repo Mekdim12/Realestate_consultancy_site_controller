@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import '../../controller/connectivity_controller.dart';
 
 class NoInternetPage extends StatelessWidget {
+  final NetworkController _networkController = Get.find<NetworkController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,15 +30,30 @@ class NoInternetPage extends StatelessWidget {
 
             Image.asset(
               'assets/gif/no_internet.gif',
-              width: 500,
-              height: 500,
+              width: 300,
+              height: 300,
             ),
+            ElevatedButton(
+              onPressed: () async {
+
+                _networkController
+                    .checkCurrentConnection();
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.refresh),
+                  Text('Refresh'),
+                ],
+              ),
+            ),
+            Container(margin: EdgeInsets.symmetric(vertical: 25),),
             const SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: Center(
                   child: Text(
-                    '📶📶❌ No Internet Connection 📶📶❌',
+                    '❌ No Internet Connection ❌',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.purple,
