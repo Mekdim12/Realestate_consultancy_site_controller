@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'call_request_detail_page.dart';
 import 'contact_me_detail_page.dart';
@@ -23,8 +25,11 @@ class _ContactUserPageState extends State<ContactUserPage> {
       LIST_OF_REQUESTED_PHONE_CALL;
       LIST_OF_CONTACT_ME_MESSAGES;
     });
-
     fetchData();
+    Timer.periodic(Duration(seconds: 120), (timer) {
+      fetchData();
+    });
+    
   }
 
   Future<void> fetchData() async {
@@ -32,6 +37,10 @@ class _ContactUserPageState extends State<ContactUserPage> {
       List response = await apiService.fetchContactInformation();
       LIST_OF_REQUESTED_PHONE_CALL = response[1];
       LIST_OF_CONTACT_ME_MESSAGES = response[0];
+      setState(() {
+        LIST_OF_REQUESTED_PHONE_CALL;
+        LIST_OF_CONTACT_ME_MESSAGES;
+      });
     } catch (error) {
       // Handle the error here
     }
@@ -128,7 +137,6 @@ class _ContactUserPageState extends State<ContactUserPage> {
                                                 }
                                               });
                                             }
-                                        
                                           },
                                         )));
                               },

@@ -161,7 +161,9 @@ class _ContactMeDetailPageState extends State<ContactMeDetailPage> {
                         )
                         .closed
                         .then((_) {
-                      Navigator.pop(context);
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pop(context);
+                      });
                     });
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

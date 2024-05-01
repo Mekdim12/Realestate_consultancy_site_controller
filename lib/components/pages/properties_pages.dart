@@ -891,6 +891,35 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                         statusOfVehicle,
                                         "ACTIVE",
                                         files);
+                                response.then((value) {
+                                  if (value[0]) {
+                                    final properttObject = value[1];
+                                    setState(() {
+                                      _propertyObjectData = properttObject;
+                                    });
+
+                                    saveChanges();
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(
+                                          const SnackBar(
+                                              duration: Duration(seconds: 2),
+                                              content: Text(
+                                                  "Property has been added successfully")),
+                                        )
+                                        .closed
+                                        .then((_) {
+                                      if (Navigator.canPop(context)) {
+                                        Navigator.pop(context);
+                                      }
+                                    });
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Failed to save'),
+                                      ),
+                                    );
+                                  }
+                                });
                               },
                               child: const Text('Submit'),
                             ),
