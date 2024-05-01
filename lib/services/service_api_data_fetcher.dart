@@ -88,7 +88,7 @@ class ApiFetcherService {
     }
 
     final parsed = jsonDecode(response.body);
-
+    
     return BrouchersData.fromJsonList(parsed);
   }
 

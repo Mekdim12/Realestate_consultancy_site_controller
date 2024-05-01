@@ -40,9 +40,10 @@ class ApiDataUploaderAndUpdater {
     final response = await dio.post(url.toString(), data: formData);
 
     if (response.statusCode == 200) {
-      return response.data;
+      var resp = PropertyVehiclesData.fromJson(response.data);
+      return [true, resp];
     } else {
-      return false;
+      return [false, false];
     }
   }
 
@@ -86,7 +87,6 @@ class ApiDataUploaderAndUpdater {
     if (response.statusCode == 200) {
       var resp = PropertyRealstateData.fromJson(response.data);
       return [true, resp];
-
     } else {
       return [false, false];
     }
