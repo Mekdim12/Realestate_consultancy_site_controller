@@ -70,7 +70,7 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
                 controller: _descriptionController,
                 cursorColor: Colors.purple,
                 decoration: const InputDecoration(
-                  enabledBorder:  UnderlineInputBorder(
+                  enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.purple)),
                   icon: Icon(Icons.abc_rounded),
                   iconColor: Color.fromARGB(255, 85, 42, 92),
@@ -157,22 +157,22 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
                         allowMultiple: false,
                         dialogTitle: "Select Brocuhers Image",
                       );
-                        if (result != null) {
-                          final path = result.files.single.path!;
-                          final fileObject = File(path);
-                          _imageFile = fileObject;
-                        }
-                      },
-                      icon: const Icon(Icons.upload_file),
-                      label: const Text("Upload"),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      if (result != null) {
+                        final path = result.files.single.path!;
+                        final fileObject = File(path);
+                        _imageFile = fileObject;
+                      }
+                    },
+                    icon: const Icon(Icons.upload_file),
+                    label: const Text("Upload"),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
                 ),
+              ),
 
               Align(
                 alignment: Alignment.bottomCenter,
@@ -214,39 +214,51 @@ class _BrouchersDetailPageState extends State<BrouchersDetailPage> {
                         CurrentSelectedChoice,
                         _imageFile!.path,
                       );
-                      
+
                       String responseMessage = "";
                       //  show a toast message that the data is saved
                       if (response) {
                         // update the list
                         //  call the api to fetch all the data and update the list
-                       
-                        updateList!( await apiService.fetchBrouchersAndBestOfferes());
+
+                        updateList!(
+                            await apiService.fetchBrouchersAndBestOfferes());
                         responseMessage =
                             "Brocuhers Information save successfully";
-                        } else {
+                      } else {
                         responseMessage =
                             "Data is not saved, please try again later";
                       }
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            // rounded corner for snack bar
-                            shape: RoundedRectangleBorder(
-                              side: const BorderSide(color: Colors.purple, width: 2),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            backgroundColor: Colors.grey[50],
-                            elevation: 10,
-                            content: Text(
-                              responseMessage,
-                              style: const TextStyle(
-                                  color: Colors.deepPurple,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            )),
-                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(
+                            SnackBar(
+                              duration: Duration(seconds: 1),
+                                // rounded corner for snack bar
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      color: Colors.purple, width: 2),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                backgroundColor: Colors.grey[50],
+                                elevation: 10,
+                                content: Text(
+                                  responseMessage,
+                                  style: const TextStyle(
+                                    color: Colors.deepPurple,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                )),
+                          )
+                          .closed
+                          .then((_) {
+                        Navigator.pop(context);
+                        // Navigator.of(context).pushReplacement(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => BrouchersPage(),
+                        //   ),
+                        // );
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(

@@ -35,10 +35,15 @@ class _BrouchersPageState extends State<BrouchersPage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}'); // Show error if any
           } else {
+            print('----');
+           print(listOfBroucherItems);
+           print( listOfBroucherItems.length);
             bool is_image_available = listOfBroucherItems.length > 0;
-            if (is_image_available) {
+            // if (is_image_available) {
               listOfBroucherItems = snapshot.data;
-            }
+            // }
+             print(">>>");
+            print(listOfBroucherItems);
 
             return Scaffold(
               floatingActionButton: FloatingActionButton(
