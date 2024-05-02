@@ -13,7 +13,7 @@ class BrouchersPage extends StatefulWidget {
 
 class _BrouchersPageState extends State<BrouchersPage> {
   ApiFetcherService apiService = ApiFetcherService();
-  List<BrouchersData> listOfBroucherItems = [];
+  List<dynamic> listOfBroucherItems = [];
 
   void updateList(List<BrouchersData> newList) {
     setState(() {
@@ -35,15 +35,9 @@ class _BrouchersPageState extends State<BrouchersPage> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}'); // Show error if any
           } else {
-            print('----');
-           print(listOfBroucherItems);
-           print( listOfBroucherItems.length);
+            listOfBroucherItems = snapshot.data ??
+                []; // Assign fetched data to listOfBroucherItems only if it is not null
             bool is_image_available = listOfBroucherItems.length > 0;
-            // if (is_image_available) {
-              listOfBroucherItems = snapshot.data;
-            // }
-             print(">>>");
-            print(listOfBroucherItems);
 
             return Scaffold(
               floatingActionButton: FloatingActionButton(
@@ -121,9 +115,10 @@ class _BrouchersPageState extends State<BrouchersPage> {
                                     : Text(
                                         "${currentItem.description.toString().substring(0, currentItem.description.toString().length)}..."),
                                 trailing: ElevatedButton.icon(
-                                  onPressed: () {
-                                    apiService.deleteBrocuherAndBestofferitem(
-                                        currentItem.id.toString());
+                                  onPressed: () async {
+                                    await apiService
+                                        .deleteBrocuherAndBestofferitem(
+                                            currentItem.id.toString());
                                     setState(() {
                                       listOfBroucherItems.removeAt(index);
                                     });
